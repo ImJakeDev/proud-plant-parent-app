@@ -10,8 +10,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import TabOneScreen from "../screens/HomeScreen";
+import TabTwoScreen from "../screens/PlantParentScreen";
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -28,7 +28,7 @@ export default function BottomTabNavigator() {
         name="TabOne"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }:any) => (
             <TabBarIcon name="ios-code" color={color} />
           ),
         }}
@@ -37,7 +37,7 @@ export default function BottomTabNavigator() {
         name="TabTwo"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }:any) => (
             <TabBarIcon name="ios-code" color={color} />
           ),
         }}
