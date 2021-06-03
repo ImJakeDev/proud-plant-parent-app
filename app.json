@@ -1,0 +1,12 @@
+{
+  "name": "proud-plant-parent-app",
+  "displayName": "proud-plant-parent-app",
+  "expo": {
+    "name": "proud-plant-parent-app",
+    "slug": "proud-plant-parent-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
