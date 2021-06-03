@@ -5,8 +5,6 @@
     "name": "proud-plant-parent-app",
     "slug": "proud-plant-parent-app",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   }
 }
