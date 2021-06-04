@@ -12,7 +12,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
 
-import WelcomeScreen from "../screens/WelcomeScreen";
+import BecomingParentNavigator from "./BecomingParentNavigator";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -45,12 +45,8 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Welcome" component={BecomingParentNavigator} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
-      <Stack.Screen
-        name="Welcome"
-        component={WelcomeScreen}
-        options={{ title: "Welcome!" }}
-      />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}

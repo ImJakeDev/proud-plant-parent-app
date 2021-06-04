@@ -1,9 +1,8 @@
 import * as React from "react";
-import { StyleSheet, Alert } from "react-native";
+import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Button from "../components/Button";
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 
 export default function HomeScreen() {
@@ -12,9 +11,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>Welcome soon to be</Text>
-        <Text style={styles.title}>Proud Plant Parent</Text>
-        <Text style={styles.title}>🪴</Text>
+        <Text style={styles.title}>Home is where the plants are.</Text>
       </View>
       <View
         style={styles.separator}
@@ -22,7 +19,7 @@ export default function HomeScreen() {
         darkColor="rgba(255,255,255,0.1)"
       />
       <Button
-        title="Become a Proud Plant Parent! 😁"
+        title="Go to welcome screen."
         onPress={() => navigation.navigate("Welcome")}
       />
     </View>
