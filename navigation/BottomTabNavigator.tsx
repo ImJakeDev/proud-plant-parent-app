@@ -10,8 +10,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import TabOneScreen from "../screens/HomeScreen";
-import TabTwoScreen from "../screens/PlantParentScreen";
+import HomeScreen from "../screens/HomeScreen";
+import PlantParentScreen from "../screens/PlantParentScreen";
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -63,8 +63,8 @@ function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{ headerTitle: "Tab One Title" }}
       />
     </TabOneStack.Navigator>
@@ -77,8 +77,8 @@ function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
+        name="PlantParentScreen"
+        component={PlantParentScreen}
         options={{ headerTitle: "Tab Two Title" }}
       />
     </TabTwoStack.Navigator>
