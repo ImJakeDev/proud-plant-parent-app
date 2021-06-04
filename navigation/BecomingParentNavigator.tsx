@@ -2,7 +2,7 @@ import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import WelcomeScreen from '../screens/WelcomeScreen'
-import PlantParentScreen from '../screens/PlantParentScreen'
+import BecomeAPlantParentScreen from '../screens/BecomeAPlantParentScreen'
 
 const Stack = createStackNavigator()
 
@@ -15,9 +15,9 @@ export default function BecomingParentNavigator() {
         options={{ title: "Welcome!" }}
       />
       <Stack.Screen
-        name="PlantParentScreen"
-        component={PlantParentScreen}
-        options={{ headerTitle: "Plant Parent" }}
+        name="BecomeAPlantParentScreen"
+        component={BecomeAPlantParentScreen}
+        options={{ headerTitle: "The Path to Plant Parenthood" }}
       />
     </Stack.Navigator>
   )

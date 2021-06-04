@@ -18,7 +18,7 @@ export default function WelcomeScreen() {
       />
       <Button
         title="Become a Proud Plant Parent! 😁"
-        onPress={() => navigation.navigate("PlantParentScreen")}
+        onPress={() => navigation.navigate("BecomeAPlantParentScreen")}
       />
     </View>
   );
