@@ -12,8 +12,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
 
+import WelcomeScreen from "../screens/WelcomeScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import { RootStackParamList } from "../types";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 
@@ -32,6 +32,12 @@ export default function Navigation({
   );
 }
 
+type RootStackParamList = {
+  Root: undefined;
+  Welcome: undefined;
+  NotFound: undefined;
+};
+
 // A root stack navigator is often used for displaying modals on top of all other content
 // Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>();
@@ -40,6 +46,11 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={BottomTabNavigator} />
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={{ title: "Welcome!" }}
+      />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}

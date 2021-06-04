@@ -17,7 +17,7 @@ interface ButtonProps {
   touchSoundDisabled?: boolean;
 }
 
-export default function Button(props:ButtonProps) {
+export default function Button(props: ButtonProps) {
   const { onPress, title } = props;
   return (
     <View style={{ paddingBottom: 20 }}>

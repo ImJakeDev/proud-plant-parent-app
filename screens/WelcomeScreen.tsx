@@ -1,21 +1,16 @@
 import * as React from "react";
-import { StyleSheet, Alert } from "react-native";
+import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Button from "../components/Button";
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 
-export default function HomeScreen() {
+export default function WelcomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.title}>Welcome soon to be</Text>
-        <Text style={styles.title}>Proud Plant Parent</Text>
-        <Text style={styles.title}>🪴</Text>
-      </View>
+      <Title />
       <View
         style={styles.separator}
         lightColor="#e1e1e1"
@@ -23,8 +18,18 @@ export default function HomeScreen() {
       />
       <Button
         title="Become a Proud Plant Parent! 😁"
-        onPress={() => navigation.navigate("Welcome")}
+        onPress={() => navigation.navigate("TabTwo")}
       />
+    </View>
+  );
+}
+
+function Title() {
+  return (
+    <View>
+      <Text style={styles.title}>Welcome soon to be</Text>
+      <Text style={styles.title}>Proud Plant Parent</Text>
+      <Text style={styles.title}>🪴</Text>
     </View>
   );
 }
