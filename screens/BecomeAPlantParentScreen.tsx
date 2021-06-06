@@ -1,17 +1,19 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TextInput, Button } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 
-export default function BecomeAPlantParentScreen(params:{}) {
+import Button from "../components/Button";
+import TextInput from "../components/TextInput";
+
+export default function BecomeAPlantParentScreen() {
   const { control, handleSubmit, formState: { errors } } = useForm();
 
   return (
     <View style={styles.container}>
-      <Controller
+      {/* <Controller
         control={control}
         render={({ field: { onChange, onBlur, value }}) => (
           <TextInput
-            style={{paddingHorizontal: 20, borderWidth: 1, paddingVertical: 8}}
             onBlur={onBlur}
             onChangeText={value => onChange(value)}
             value={value}
@@ -20,6 +22,12 @@ export default function BecomeAPlantParentScreen(params:{}) {
         name="firstName"
         rules={{ required: true }}
         defaultValue=""
+      /> */}
+      <TextInput
+        control={control}
+        onChangeText={value => onChange(value)}
+        rules={{ required: true }}
+        value={value}
       />
       {errors.firstName && <Text>First Name is required.</Text>}
 
@@ -27,7 +35,6 @@ export default function BecomeAPlantParentScreen(params:{}) {
         control={control}
         render={({ field: { onChange, onBlur, value }}) => (
           <TextInput
-            style={{paddingHorizontal: 20, borderWidth: 1, paddingVertical: 8}}
             onBlur={onBlur}
             onChangeText={value => onChange(value)}
             value={value}
