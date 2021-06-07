@@ -1,10 +1,10 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import WelcomeScreen from '../screens/WelcomeScreen'
-import BecomeAPlantParentScreen from '../screens/BecomeAPlantParentScreen'
+import WelcomeScreen from "../screens/WelcomeScreen";
+import BecomeAPlantParentScreen from "../screens/BecomeAPlantParentScreen";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 export default function BecomingParentNavigator() {
   return (
@@ -20,5 +20,5 @@ export default function BecomingParentNavigator() {
         options={{ headerTitle: "The Path to Plant Parenthood" }}
       />
     </Stack.Navigator>
-  )
+  );
 }
