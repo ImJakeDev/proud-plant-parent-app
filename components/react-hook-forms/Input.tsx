@@ -1,52 +1,58 @@
-import * as React from 'react'
-import styled from 'styled-components/native'
-import { ErrorMessage } from '@hookform/error-message';
+import * as React from "react";
+import { StyleSheet, View, TextInput, Text } from "react-native";
+import { ErrorMessage } from "@hookform/error-message";
+import InputTypes from "../../Types/TextInputTypes";
 
-interface InputProps {
+interface InputProps extends InputTypes {
   label: string;
+  name: string;
   errors: {};
-  isError: boolean
+  isRequired: boolean;
 }
 
-const COLORS = {
-  white: '#FFFFFF',
-  gray: '#AAAAAA',
-  red: '#FF5555',
-}
+export const Input = React.forwardRef(
+  (props: InputProps, forwardedRef: any) => {
+    const { label, name, errors, isRequired, ...textInputProps } = props;
+    
+    const isError = Boolean(Object.entries(errors).length > 0);
+    const isLabel = Boolean(label);
 
-const Wrapper = styled.View`
-  margin-bottom: 15px;
-`
+    return (
+      <View style={styles.container}>
+        <View style={{flexDirection: "row"}}>
+          {isLabel && <Text style={styles.label}>{label}</Text>}
+          {isRequired && <Text style={{color: "red"}}>*</Text>}
+        </View>
+        <TextInput
+          {...textInputProps}
+          ref={forwardedRef}
+          style={[styles.input, { borderColor: isError ? "red" : "gray" }]}
+        />
+        {isError && (
+          <Text style={styles.error}>
+            {Object.entries(errors).map((item: any) => {
+              return item[0] === name && item[1].message;
+            })}
+          </Text>
+        )}
+      </View>
+    );
+  }
+);
 
-const StyledInput = styled.TextInput<InputProps>`
-  border-color: ${(props) => (props.isError ? COLORS.red : COLORS.gray)};
-  border-width: 1px;
-  width: 300px;
-  height: 50px;
-`
-
-const Label = styled.Text`
-  color: ${COLORS.gray};
-  font-size: 20px;
-  letter-spacing: 2px;
-`
-
-const Error = styled.Text`
-  color: ${COLORS.red};
-`
-
-export const Input = React.forwardRef((props:InputProps, forwardedRef) => {
-  const { label, errors, ...textInputProps } = props
-
-  return (
-    <Wrapper>
-      {Boolean(label) && <Label>{label}</Label>}
-      <StyledInput {...textInputProps} ref={forwardedRef} />
-      <ErrorMessage
-        errors={errors}
-        name="singleErrorInput"
-        render={({ message }) => <Error>{message}</Error>}
-      />
-    </Wrapper>
-  )
-})
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 2,
+    width: 250,
+    height: 50,
+  },
+  label: {
+    fontSize: 20,
+  },
+  error: {
+    color: "red",
+  },
+});

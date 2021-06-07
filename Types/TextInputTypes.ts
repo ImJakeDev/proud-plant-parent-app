@@ -64,7 +64,7 @@ export default interface TextInputProps {
   numberOfLines?: number;
   onBlur?: () => any;
   onChange?: () => void;
-  onChangeText?: (value?: any) => any;
+  onChangeText?: () => any;
   onContentSizeChange?: () => void;
   onEndEditing?: () => void;
   onPressIn?: () => void;
