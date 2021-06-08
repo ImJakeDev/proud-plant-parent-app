@@ -1,3 +1,4 @@
 declare module "@env" {
-  export const API_BASE: string;
+  export const PROUD_PLANT_PARENT_ENDPOINT: string;
+  export const X_HASURA_ADMIN_SECRET: string;
 }

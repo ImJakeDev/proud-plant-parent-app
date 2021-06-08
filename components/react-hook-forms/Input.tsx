@@ -1,8 +1,15 @@
 import * as React from "react";
-import { StyleSheet, View, TextInput, Text } from "react-native";
+import { StyleSheet, View, TextInput, Text, TextInputProps } from "react-native";
+
+interface InputProps extends TextInputProps {
+  label?: string;
+  name?: string;
+  errors?: {};
+  isRequired?: boolean;
+}
 
 export const Input = React.forwardRef(
-  (props, forwardedRef) => {
+  (props:InputProps, forwardedRef) => {
     const { label, name, errors, isRequired, ...textInputProps } = props;
 
     const isError = Boolean(Object.entries(errors).length > 0);
