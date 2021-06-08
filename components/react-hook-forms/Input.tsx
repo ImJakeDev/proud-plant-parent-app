@@ -1,6 +1,5 @@
 import * as React from "react";
 import { StyleSheet, View, TextInput, Text } from "react-native";
-import { ErrorMessage } from "@hookform/error-message";
 import InputTypes from "../../Types/TextInputTypes";
 
 interface InputProps extends InputTypes {

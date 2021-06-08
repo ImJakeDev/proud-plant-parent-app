@@ -6,8 +6,16 @@ import { Input } from "./Input";
 interface FormInputProps extends InputTypes {
   name: string;
   label?: string;
-  rules?: { required?: string};
+  rules?: {};
   errors?: {};
+}
+
+interface RulesTypes {
+  required?: string;
+  minLength?: {
+    message?: string;
+    value?: number;
+  };
 }
 
 const ControlledInput = React.forwardRef(

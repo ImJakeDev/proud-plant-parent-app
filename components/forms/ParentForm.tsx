@@ -20,7 +20,7 @@ export default function ParentForm() {
   return (
     <View>
       <FormProvider {...formMethods}>
-        <FormInput
+        {/* <FormInput
           name="UserName"
           label="Username"
           rules={{ required: "Username is required!" }}
@@ -37,6 +37,24 @@ export default function ParentForm() {
             },
           }}
           ref={passwordRef}
+        /> */}
+        <FormInput
+          name="firstname"
+          label="First Name"
+          rules={{ required: "First Name is required!" }}
+          returnKeyType="next"
+        />
+        <FormInput
+          name="lastname"
+          label="Last Name"
+          rules={{ required: "Last Name is required!" }}
+          returnKeyType="next"
+        />
+        <FormInput
+          name="nickname"
+          label="Nick Name"
+          rules={{ required: "Nick Name is required!" }}
+          returnKeyType="next"
         />
       </FormProvider>
       <Button
