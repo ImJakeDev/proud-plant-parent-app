@@ -1,5 +1,10 @@
 import * as React from "react";
-import { useController, useFormContext, Message, ValidationRule } from "react-hook-form";
+import {
+  useController,
+  useFormContext,
+  Message,
+  ValidationRule,
+} from "react-hook-form";
 import { TextInputProps } from "react-native";
 import { Input } from "./Input";
 
@@ -18,16 +23,9 @@ export type RegisterOptions = Partial<{
   pattern: ValidationRule<RegExp>;
 }>;
 
-
-
 const ControlledInput = React.forwardRef(
   (props: FormInputProps, forwardedRef: any) => {
-    const {
-      name,
-      rules,
-      defaultValue = "",
-      ...inputProps
-    } = props;
+    const { name, rules, defaultValue = "", ...inputProps } = props;
     const { required } = rules;
     const formContext = useFormContext();
 
