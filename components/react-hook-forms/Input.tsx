@@ -12,15 +12,15 @@ interface InputProps extends InputTypes {
 export const Input = React.forwardRef(
   (props: InputProps, forwardedRef: any) => {
     const { label, name, errors, isRequired, ...textInputProps } = props;
-    
+
     const isError = Boolean(Object.entries(errors).length > 0);
     const isLabel = Boolean(label);
 
     return (
       <View style={styles.container}>
-        <View style={{flexDirection: "row"}}>
+        <View style={{ flexDirection: "row" }}>
           {isLabel && <Text style={styles.label}>{label}</Text>}
-          {isRequired && <Text style={{color: "red"}}>*</Text>}
+          {isRequired && <Text style={{ color: "red" }}>*</Text>}
         </View>
         <TextInput
           {...textInputProps}
