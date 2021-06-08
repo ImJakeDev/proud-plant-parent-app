@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     width: 250,
     height: 50,
+    fontSize: 30,
+    paddingLeft: 5,
   },
   label: {
     fontSize: 20,
