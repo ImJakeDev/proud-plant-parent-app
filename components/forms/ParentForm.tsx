@@ -7,26 +7,6 @@ import { useNavigation } from "@react-navigation/native";
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 
-const ADD_PLANT_PARENT = gql`
-  mutation ($firstname: String!, $lastname: String!, $nickname: String!) {
-    insert_plantparent(
-      objects: {
-        firstname: $firstname
-        lastname: $lastname
-        nickname: $nickname
-      }
-    ) {
-      returning {
-        firstname
-        lastname
-        nickname
-        plantparentid
-        timeofparenthood
-      }
-    }
-  }
-`;
-
 export default function ParentForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
@@ -81,3 +61,23 @@ export default function ParentForm() {
     </View>
   );
 }
+
+const ADD_PLANT_PARENT = gql`
+  mutation ($firstname: String!, $lastname: String!, $nickname: String!) {
+    insert_plantparent(
+      objects: {
+        firstname: $firstname
+        lastname: $lastname
+        nickname: $nickname
+      }
+    ) {
+      returning {
+        firstname
+        lastname
+        nickname
+        plantparentid
+        timeofparenthood
+      }
+    }
+  }
+`;
