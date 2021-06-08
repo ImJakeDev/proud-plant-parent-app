@@ -1,15 +1,21 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { View } from "react-native";
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 
 const ADD_PLANT_PARENT = gql`
-  mutation ($firstname: String!, $lastname: String!, $nickname: String! ) {
-    insert_plantparent(objects: {firstname: $firstname, lastname: $lastname, nickname: $nickname}) {
+  mutation ($firstname: String!, $lastname: String!, $nickname: String!) {
+    insert_plantparent(
+      objects: {
+        firstname: $firstname
+        lastname: $lastname
+        nickname: $nickname
+      }
+    ) {
       returning {
         firstname
         lastname
@@ -24,16 +30,22 @@ const ADD_PLANT_PARENT = gql`
 export default function ParentForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
-  const [addPlantParent, {error: mutationError} ] = useMutation(ADD_PLANT_PARENT);
-  const isMutationError = Boolean(mutationError)
+  const [addPlantParent, { error: mutationError }] =
+    useMutation(ADD_PLANT_PARENT);
+  const isMutationError = Boolean(mutationError);
 
   const onSubmit = (form: any) => {
     console.log(form);
     addPlantParent({
-      variables: { firstname: form.firstname, lastname: form.lastname, nickname: form.nickname },
-      // onCompleted: () => navigation.navigate("BecomeAPlantParentScreen")
+      variables: {
+        firstname: form.firstname,
+        lastname: form.lastname,
+        nickname: form.nickname,
+      },
     });
-    !isMutationError ? navigation.navigate("Welcome") : console.log(mutationError);
+    !isMutationError
+      ? navigation.navigate("Welcome")
+      : console.log(mutationError);
   };
 
   const onErrors = (errors: {}) => {
