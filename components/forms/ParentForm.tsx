@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { View } from "react-native";
-import { gql, useMutation } from '@apollo/client';
+import { gql, useQuery, useMutation } from '@apollo/client';
 
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
@@ -23,7 +23,7 @@ const ADD_PLANT_PARENT = gql`
 export default function ParentForm() {
   const formMethods = useForm();
 
-  const [addPlantParent] = useMutation(ADD_PLANT_PARENT);
+  const [addPlantParent, onCompleted] = useMutation(ADD_PLANT_PARENT);
 
   const onSubmit = (form: any) => {
     console.log(form);

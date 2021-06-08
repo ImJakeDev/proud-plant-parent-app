@@ -1,16 +1,8 @@
 import * as React from "react";
 import { StyleSheet, View, TextInput, Text } from "react-native";
-import InputTypes from "../../Types/TextInputTypes";
-
-interface InputProps extends InputTypes {
-  label: string;
-  name: string;
-  errors: {};
-  isRequired: boolean;
-}
 
 export const Input = React.forwardRef(
-  (props: InputProps, forwardedRef: any) => {
+  (props, forwardedRef) => {
     const { label, name, errors, isRequired, ...textInputProps } = props;
 
     const isError = Boolean(Object.entries(errors).length > 0);

@@ -1,25 +1,9 @@
 import * as React from "react";
 import { useController, useFormContext } from "react-hook-form";
-import InputTypes from "../../Types/TextInputTypes";
 import { Input } from "./Input";
 
-interface FormInputProps extends InputTypes {
-  name: string;
-  label?: string;
-  rules?: {};
-  errors?: {};
-}
-
-interface RulesTypes {
-  required?: string;
-  minLength?: {
-    message?: string;
-    value?: number;
-  };
-}
-
 const ControlledInput = React.forwardRef(
-  (props: FormInputProps, forwardedRef: any) => {
+  (props, forwardedRef) => {
     const { name, rules, defaultValue = "", ...inputProps } = props;
     const { required } = rules;
     const formContext = useFormContext();
@@ -47,7 +31,7 @@ const ControlledInput = React.forwardRef(
 );
 
 export const FormInput = React.forwardRef(
-  (props: FormInputProps, forwardedRef: any) => {
+  (props, forwardedRef) => {
     const { name, ...inputProps } = props;
     const formContext = useFormContext();
 
