@@ -11,7 +11,7 @@ import { Input } from "./Input";
 interface FormInputProps extends TextInputProps {
   name: string;
   label?: string;
-  rules: RegisterOptions;
+  rules?: RegisterOptions;
 }
 
 export type RegisterOptions = Partial<{
@@ -26,7 +26,9 @@ export type RegisterOptions = Partial<{
 const ControlledInput = React.forwardRef(
   (props: FormInputProps, forwardedRef: any) => {
     const { name, rules, defaultValue = "", ...inputProps } = props;
-    const { required } = rules;
+
+    const isRequired = Boolean(rules?.required)
+
     const formContext = useFormContext();
 
     const {
@@ -41,7 +43,7 @@ const ControlledInput = React.forwardRef(
         {...inputProps}
         name={name}
         errors={errors}
-        isRequired={Boolean(required)}
+        isRequired={isRequired}
         onChangeText={field.onChange}
         onBlur={field.onBlur}
         value={field.value}

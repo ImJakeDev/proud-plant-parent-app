@@ -50,7 +50,6 @@ export default function ParentForm() {
         <FormInput
           name="nickname"
           label="Nick Name"
-          rules={{ required: "Nick Name is required!" }}
           returnKeyType="next"
         />
       </FormProvider>
