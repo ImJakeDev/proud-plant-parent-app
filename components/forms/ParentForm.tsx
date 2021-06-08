@@ -24,7 +24,7 @@ export default function ParentForm() {
       },
     });
     !isMutationError
-      ? navigation.navigate("Welcome")
+      ? navigation.navigate("Root", {screen: 'TabOne'})
       : console.log(mutationError);
   };
 
