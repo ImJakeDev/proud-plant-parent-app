@@ -1,36 +1,45 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { View } from "react-native";
+import { ActivityIndicator, View, Text } from "react-native";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 
+interface FormObj {
+  firstname: string;
+  lastname: string;
+  nickname: string;
+}
+
 export default function ParentForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
-  const [addPlantParent, { error: mutationError }] =
-    useMutation(ADD_PLANT_PARENT);
-  const isMutationError = Boolean(mutationError);
 
-  const onSubmit = (form: any) => {
-    console.log(form);
-    addPlantParent({
-      variables: {
-        firstname: form.firstname,
-        lastname: form.lastname,
-        nickname: form.nickname,
-      },
-    });
-    !isMutationError
-      ? navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: "Root" }],
-          })
-        )
-      : console.log(mutationError);
+  const [addPlantParent, { loading, error }] = useMutation(ADD_PLANT_PARENT);
+  const isMutationError = Boolean(error);
+  const isMutationLoading = Boolean(loading);
+
+  const onSubmit = (form: FormObj) => {
+    const handleMutation = async (form: FormObj) => {
+      const { data } = await addPlantParent({
+        variables: {
+          firstname: form.firstname,
+          lastname: form.lastname,
+          nickname: form.nickname,
+        },
+      });
+      !isMutationLoading && !isMutationError
+        ? navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: "Root" }],
+            })
+          )
+        : console.log(error);
+    };
+    handleMutation(form);
   };
 
   const onErrors = (errors: {}) => {
@@ -54,10 +63,15 @@ export default function ParentForm() {
         />
         <FormInput name="nickname" label="Nick Name" returnKeyType="next" />
       </FormProvider>
-      <Button
-        title="Submit"
-        onPress={formMethods.handleSubmit(onSubmit, onErrors)}
-      />
+      {isMutationLoading ? (
+        <ActivityIndicator size="large" color="#00ff00" />
+      ) : (
+        <Button
+          title="Submit"
+          onPress={formMethods.handleSubmit(onSubmit, onErrors)}
+        />
+      )}
+      {isMutationError && <Text>{error?.message}</Text>}
     </View>
   );
 }
