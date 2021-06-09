@@ -5,6 +5,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { PROUD_PLANT_PARENT_ENDPOINT, X_HASURA_ADMIN_SECRET } from "@env";
 
+import { ProudPlantParentProvider } from "./global/proudPlantParentContext";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
@@ -28,7 +29,9 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <ApolloProvider client={client}>
-          <Navigation colorScheme={colorScheme} />
+          <ProudPlantParentProvider>
+            <Navigation colorScheme={colorScheme} />
+          </ProudPlantParentProvider>
           <StatusBar />
         </ApolloProvider>
       </SafeAreaProvider>
