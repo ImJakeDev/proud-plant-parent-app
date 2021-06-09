@@ -37,7 +37,7 @@ export default function ParentForm() {
               routes: [{ name: "Root" }],
             })
           )
-        : console.log(error);
+        : console.error(error);
     };
     handleMutation(form);
   };
