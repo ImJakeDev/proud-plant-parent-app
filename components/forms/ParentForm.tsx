@@ -2,7 +2,7 @@ import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { View } from "react-native";
 import { gql, useMutation } from "@apollo/client";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, CommonActions } from "@react-navigation/native";
 
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
@@ -24,7 +24,12 @@ export default function ParentForm() {
       },
     });
     !isMutationError
-      ? navigation.navigate("Root", {screen: 'TabOne'})
+      ? navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: "Root" }],
+          })
+        )
       : console.log(mutationError);
   };
 
@@ -47,11 +52,7 @@ export default function ParentForm() {
           rules={{ required: "Last Name is required!" }}
           returnKeyType="next"
         />
-        <FormInput
-          name="nickname"
-          label="Nick Name"
-          returnKeyType="next"
-        />
+        <FormInput name="nickname" label="Nick Name" returnKeyType="next" />
       </FormProvider>
       <Button
         title="Submit"

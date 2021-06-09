@@ -14,8 +14,8 @@ import HomeScreen from "../screens/HomeScreen";
 import PlantParentScreen from "../screens/PlantParentScreen";
 
 type BottomTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  Home: undefined;
+  PlantParent: undefined;
 };
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -25,11 +25,11 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
     >
       <BottomTab.Screen
-        name="TabOne"
+        name="Home"
         component={TabOneNavigator}
         options={{
           tabBarIcon: ({ color }: any) => (
@@ -38,7 +38,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="PlantParent"
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }: any) => (
