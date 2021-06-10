@@ -4,7 +4,7 @@ import { ActivityIndicator, View, Text } from "react-native";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 
-import { useProudPlantParent } from '../../global/proudPlantParentContext'
+import { useProudPlantParent } from "../../global/proudPlantParentContext";
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 
@@ -28,7 +28,7 @@ export default function ParentForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
 
-  const { dispatch } = useProudPlantParent()
+  const { dispatch } = useProudPlantParent();
 
   const [state, setState] = React.useState<IParentObj>();
 
@@ -61,14 +61,12 @@ export default function ParentForm() {
       console.log("State is", state);
 
       dispatch({ type: "ADD_PLANT_PARENT", payload: state });
-      
+
       !isMutationLoading && !isMutationError
         ? navigation.dispatch(
             CommonActions.reset({
               index: 0,
-              routes: [
-                { name: "Root", params: state },
-              ],
+              routes: [{ name: "Root", params: state }],
             })
           )
         : console.error(error);
