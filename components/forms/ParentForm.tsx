@@ -4,6 +4,7 @@ import { ActivityIndicator, View, Text } from "react-native";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 
+import { useProudPlantParent } from '../../global/proudPlantParentContext'
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 
@@ -13,9 +14,23 @@ interface FormObj {
   nickname: string;
 }
 
+export interface IParentObj {
+  plantparent: {
+    firstname: string;
+    lastname: string;
+    nickname?: string;
+    plantparentid: number;
+    timeofparenthood: string;
+  };
+}
+
 export default function ParentForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
+
+  const { dispatch } = useProudPlantParent()
+
+  const [state, setState] = React.useState<IParentObj>();
 
   const [addPlantParent, { loading, error }] = useMutation(ADD_PLANT_PARENT);
   const isMutationError = Boolean(error);
@@ -30,11 +45,30 @@ export default function ParentForm() {
           nickname: form.nickname,
         },
       });
+
+      const stateObj = data.insert_plantparent.returning[0];
+
+      setState({
+        plantparent: {
+          firstname: stateObj.firstname,
+          lastname: stateObj.lastname,
+          nickname: stateObj.nickname,
+          plantparentid: stateObj.plantparentid,
+          timeofparenthood: stateObj.timeofparenthood,
+        },
+      });
+
+      console.log("State is", state);
+
+      dispatch({ type: "ADD_PLANT_PARENT", payload: state });
+      
       !isMutationLoading && !isMutationError
         ? navigation.dispatch(
             CommonActions.reset({
               index: 0,
-              routes: [{ name: "Root" }],
+              routes: [
+                { name: "Root", params: state },
+              ],
             })
           )
         : console.error(error);

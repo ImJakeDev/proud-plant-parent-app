@@ -2,11 +2,13 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { useProudPlantParent } from '../global/proudPlantParentContext'
 import Button from "../components/Button";
 import { Text, View } from "../components/Themed";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+  const { state } = useProudPlantParent();
 
   return (
     <View style={styles.container}>
@@ -22,6 +24,7 @@ export default function HomeScreen() {
         title="Go to welcome screen."
         onPress={() => navigation.navigate("Welcome", {screen: 'Welcome'})}
       />
+      <Text>{JSON.stringify(state)}</Text>
     </View>
   );
 }
