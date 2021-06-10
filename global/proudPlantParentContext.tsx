@@ -19,12 +19,14 @@ import { IParent } from "../components/forms/ParentForm";
 */
 
 interface IState {
-  __typename: string;
-  firstname: string;
-  lastname: string;
-  nickname?: string;
-  plantparentid: number | null;
-  timeofparenthood: string;
+  plantparent: {
+    __typename: string;
+    firstname: string;
+    lastname: string;
+    nickname?: string;
+    plantparentid: number | null;
+    timeofparenthood: string;
+  };
 }
 
 interface IAction {
@@ -33,12 +35,14 @@ interface IAction {
 }
 
 const initialState: IState = {
-  __typename: "",
-  firstname: "",
-  lastname: "",
-  nickname: "",
-  plantparentid: null,
-  timeofparenthood: "",
+  plantparent: {
+    __typename: "",
+    firstname: "",
+    lastname: "",
+    nickname: "",
+    plantparentid: null,
+    timeofparenthood: "",
+  },
 };
 
 const ProudPlantParentContext = createContext<{
@@ -52,7 +56,6 @@ const ProudPlantParentContext = createContext<{
 function proudPlantParentReducer(state: IState, action: IAction) {
   switch (action.type) {
     case "ADD_PLANT_PARENT":
-      console.log(state);
       return { ...state, ...action.payload };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

@@ -31,8 +31,6 @@ export default function ParentForm() {
 
   const { dispatch } = useProudPlantParent();
 
-  const [state, setState] = React.useState<IParent>();
-
   const [addPlantParent, { loading, error }] = useMutation(ADD_PLANT_PARENT);
   const isMutationError = Boolean(error);
   const isMutationLoading = Boolean(loading);
@@ -48,21 +46,13 @@ export default function ParentForm() {
       });
 
       const stateObj = data.insert_plantparent.returning[0];
-      console.log("State Obj from response return", stateObj);
+      console.log("State Obj from response return:", stateObj);
+      
+      const payload = { plantparent: stateObj }
+      console.log("New payload obj:", payload);
+      
 
-      // setState({
-      //   plantparent: {
-      //     firstname: stateObj.firstname,
-      //     lastname: stateObj.lastname,
-      //     nickname: stateObj.nickname,
-      //     plantparentid: stateObj.plantparentid,
-      //     timeofparenthood: stateObj.timeofparenthood,
-      //   },
-      // });
-
-      // console.log("Local state is", state);
-
-      dispatch({ type: "ADD_PLANT_PARENT", payload: stateObj });
+      dispatch({ type: "ADD_PLANT_PARENT", payload: payload });
 
       !isMutationLoading && !isMutationError
         ? navigation.dispatch(
