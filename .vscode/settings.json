@@ -3,10 +3,23 @@
     "HASURA",
     "Ionicons",
     "Pressable",
+    "becamefamily",
+    "dateofbirth",
+    "familyname",
     "firstname",
+    "joinedfamilyat",
     "lastname",
+    "plantdetails",
+    "plantfamily",
+    "plantfamilyid",
+    "plantgenus",
+    "plantname",
     "plantparent",
     "plantparentid",
+    "plantprofile",
+    "plantprofileid",
+    "plantspecies",
+    "scientificname",
     "timeofparenthood"
   ]
 }

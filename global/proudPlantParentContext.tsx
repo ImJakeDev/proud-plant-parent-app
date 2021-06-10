@@ -1,9 +1,25 @@
 import React, { createContext, useReducer, useContext, Dispatch } from "react";
 
-import { IParentObj } from '../components/forms/ParentForm'
+import { IParent } from '../components/forms/ParentForm'
 
-interface IStateTypes {
-  plantparent: {
+/*
+  Todo: separate concerns!
+  * Initial State:
+    - What is it? How do I want it to look?
+    - Array or object???
+  * Actions:
+    - What are my actions and what do they do?
+    - Create, Read, Update, Delete
+  * Reducers:
+    - How do I handle my reducers?
+    - Do I have categories of Reducers???
+  * Context:
+    - Where and how do I handle this? 
+    - I like wrapping things in convenience hooks
+*/  
+
+interface IState {
+  plantparent?: {
     firstname: string;
     lastname: string;
     nickname?: string;
@@ -12,38 +28,36 @@ interface IStateTypes {
   };
 }
 
-interface IActionTypes {
+interface IAction {
   type: string;
-  payload: IParentObj;
+  payload: IParent | undefined;
 }
 
-const initialState: IStateTypes = {
-  plantparent: {
-    firstname: "",
-    lastname: "",
-    nickname: "",
-    plantparentid: 0.0,
-    timeofparenthood: "",
-  },
+const initialState: IState = {
+  plantparent: {},
 };
 
 const ProudPlantParentContext = createContext<{
-  state: IStateTypes;
-  dispatch: Dispatch<IActionTypes>;
+  state: IState;
+  dispatch: Dispatch<IAction>;
 }>({
   state: initialState,
   dispatch: () => null,
 });
 
-function proudPlantParentReducer(state: IStateTypes, action: IActionTypes) {
+
+function proudPlantParentReducer(state: IState, action: IAction) {
   switch (action.type) {
     case "ADD_PLANT_PARENT":
+      console.log(state);
+      
       return action.payload;
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
   }
 }
+
 
 const ProudPlantParentProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(proudPlantParentReducer, initialState);

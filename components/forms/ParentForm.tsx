@@ -8,13 +8,13 @@ import { useProudPlantParent } from "../../global/proudPlantParentContext";
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 
-interface FormObj {
+interface IForm {
   firstname: string;
   lastname: string;
-  nickname: string;
+  nickname?: string;
 }
 
-export interface IParentObj {
+export interface IParent {
   plantparent: {
     firstname: string;
     lastname: string;
@@ -30,14 +30,14 @@ export default function ParentForm() {
 
   const { dispatch } = useProudPlantParent();
 
-  const [state, setState] = React.useState<IParentObj>();
+  const [state, setState] = React.useState<IParent>();
 
   const [addPlantParent, { loading, error }] = useMutation(ADD_PLANT_PARENT);
   const isMutationError = Boolean(error);
   const isMutationLoading = Boolean(loading);
 
-  const onSubmit = (form: FormObj) => {
-    const handleMutation = async (form: FormObj) => {
+  const onSubmit = (form: IForm) => {
+    const handleMutation = async (form: IForm) => {
       const { data } = await addPlantParent({
         variables: {
           firstname: form.firstname,
@@ -66,7 +66,7 @@ export default function ParentForm() {
         ? navigation.dispatch(
             CommonActions.reset({
               index: 0,
-              routes: [{ name: "Root", params: state }],
+              routes: [{ name: "Root" }],
             })
           )
         : console.error(error);
