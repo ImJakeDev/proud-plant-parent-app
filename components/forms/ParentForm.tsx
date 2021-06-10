@@ -16,6 +16,7 @@ interface IForm {
 
 export interface IParent {
   plantparent: {
+    __typename: string;
     firstname: string;
     lastname: string;
     nickname?: string;
@@ -47,20 +48,21 @@ export default function ParentForm() {
       });
 
       const stateObj = data.insert_plantparent.returning[0];
+      console.log("State Obj from response return", stateObj);
+      
+      // setState({
+      //   plantparent: {
+      //     firstname: stateObj.firstname,
+      //     lastname: stateObj.lastname,
+      //     nickname: stateObj.nickname,
+      //     plantparentid: stateObj.plantparentid,
+      //     timeofparenthood: stateObj.timeofparenthood,
+      //   },
+      // });
 
-      setState({
-        plantparent: {
-          firstname: stateObj.firstname,
-          lastname: stateObj.lastname,
-          nickname: stateObj.nickname,
-          plantparentid: stateObj.plantparentid,
-          timeofparenthood: stateObj.timeofparenthood,
-        },
-      });
+      // console.log("Local state is", state);
 
-      console.log("State is", state);
-
-      dispatch({ type: "ADD_PLANT_PARENT", payload: state });
+      dispatch({ type: "ADD_PLANT_PARENT", payload: stateObj });
 
       !isMutationLoading && !isMutationError
         ? navigation.dispatch(

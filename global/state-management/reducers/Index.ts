@@ -4,7 +4,7 @@ import { ActionType, IAddPlantPatent, IEditPlantPatent, IDeletePlantPatent, Acti
 export function proudPlantParentReducer(state: InitState, action: Actions) {
   switch (action.type) {
     case ActionType.ADD_PLANT_PARENT:
-      return action.payload;
+      return { ...state, ...action.payload };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
