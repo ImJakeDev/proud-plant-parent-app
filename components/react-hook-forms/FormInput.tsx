@@ -27,7 +27,7 @@ const ControlledInput = React.forwardRef(
   (props: FormInputProps, forwardedRef: any) => {
     const { name, rules, defaultValue = "", ...inputProps } = props;
 
-    const isRequired = Boolean(rules?.required)
+    const isRequired = Boolean(rules?.required);
 
     const formContext = useFormContext();
 
