@@ -1,5 +1,17 @@
-import { InitState, IPlantParent, IPlantFamily, IPlantProfile, initialState } from '../init-state/Index'
-import { ActionType, IAddPlantPatent, IEditPlantPatent, IDeletePlantPatent, Actions } from '../actions/Index'
+import {
+  InitState,
+  IPlantParent,
+  IPlantFamily,
+  IPlantProfile,
+  initialState,
+} from "../init-state/Index";
+import {
+  ActionType,
+  IAddPlantPatent,
+  IEditPlantPatent,
+  IDeletePlantPatent,
+  Actions,
+} from "../actions/Index";
 
 export function proudPlantParentReducer(state: InitState, action: Actions) {
   switch (action.type) {

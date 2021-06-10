@@ -49,7 +49,7 @@ export default function ParentForm() {
 
       const stateObj = data.insert_plantparent.returning[0];
       console.log("State Obj from response return", stateObj);
-      
+
       // setState({
       //   plantparent: {
       //     firstname: stateObj.firstname,

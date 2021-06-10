@@ -1,5 +1,5 @@
 export interface InitState {
-  plantparent: IPlantParent
+  plantparent: IPlantParent;
 }
 
 export interface IPlantParent {
@@ -55,9 +55,9 @@ export const initialState: InitState = {
           dateofbirth: "",
           joinedfamilyat: "",
           age: "",
-          plantfamilyid: null
-        }
-      ]
-    }
-  }
+          plantfamilyid: null,
+        },
+      ],
+    },
+  },
 };

@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useContext, Dispatch } from "react";
 
-import { IParent } from '../components/forms/ParentForm'
+import { IParent } from "../components/forms/ParentForm";
 
 /*
   Todo: separate concerns!
@@ -16,15 +16,15 @@ import { IParent } from '../components/forms/ParentForm'
   * Context:
     - Where and how do I handle this? 
     - I like wrapping things in convenience hooks
-*/  
+*/
 
 interface IState {
   __typename: string;
-    firstname: string;
-    lastname: string;
-    nickname?: string;
-    plantparentid: number | null;
-    timeofparenthood: string;
+  firstname: string;
+  lastname: string;
+  nickname?: string;
+  plantparentid: number | null;
+  timeofparenthood: string;
 }
 
 interface IAction {
@@ -49,7 +49,6 @@ const ProudPlantParentContext = createContext<{
   dispatch: () => null,
 });
 
-
 function proudPlantParentReducer(state: IState, action: IAction) {
   switch (action.type) {
     case "ADD_PLANT_PARENT":
@@ -60,7 +59,6 @@ function proudPlantParentReducer(state: IState, action: IAction) {
     }
   }
 }
-
 
 const ProudPlantParentProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(proudPlantParentReducer, initialState);

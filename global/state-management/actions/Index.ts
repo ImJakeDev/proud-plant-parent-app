@@ -26,7 +26,7 @@ export interface IEditPlantPatent {
 
 export interface IDeletePlantPatent {
   type: ActionType.DELETE_PLANT_PARENT;
-  payload: {plantparentid: number};
+  payload: { plantparentid: number };
 }
 
 export type Actions = IAddPlantPatent | IEditPlantPatent | IDeletePlantPatent;
