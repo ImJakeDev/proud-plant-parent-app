@@ -1,9 +1,7 @@
 import React, { createContext, useReducer, useContext, Dispatch } from "react";
 
 import { initialState, InitState } from "./state-management/init-state/Index";
-
 import { Actions } from "./state-management/actions/Index";
-
 import { proudPlantParentReducer } from "./state-management/reducers/Index";
 
 /*
@@ -22,44 +20,6 @@ import { proudPlantParentReducer } from "./state-management/reducers/Index";
     - I like wrapping things in convenience hooks
 */
 
-// export interface IState {
-//   plantparent: {
-//     __typename: string;
-//     firstname: string;
-//     lastname: string;
-//     nickname?: string;
-//     plantparentid: number | null;
-//     timeofparenthood: string;
-//   };
-// }
-
-// export interface IAction {
-//   type: string;
-//   payload: IParent | undefined;
-// }
-
-// export interface IParent {
-//   plantparent: {
-//     __typename: string;
-//     firstname: string;
-//     lastname: string;
-//     nickname?: string;
-//     plantparentid: number;
-//     timeofparenthood: string;
-//   };
-// }
-
-// export interface IFamily {
-//   plantparent: {
-//     __typename: string;
-//     firstname: string;
-//     lastname: string;
-//     nickname?: string;
-//     plantparentid: number;
-//     timeofparenthood: string;
-//   };
-// }
-
 const ProudPlantParentContext = createContext<{
   state: InitState;
   dispatch: Dispatch<Actions>;
@@ -68,20 +28,10 @@ const ProudPlantParentContext = createContext<{
   dispatch: () => null,
 });
 
-// export function proudPlantParentReducer(state: InitState, action: IAction) {
-//   switch (action.type) {
-//     case "ADD_PLANT_PARENT":
-//       return { ...state, ...action.payload };
-//     case "ADD_PLANT_FAMILY":
-//       return { ...state, plantfamily: { ...action.payload } };
-//     default: {
-//       throw new Error(`Unhandled action type: ${action.type}`);
-//     }
-//   }
-// }
-
 export const ProudPlantParentProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(proudPlantParentReducer, initialState);
+  console.log("Proud Plant Parent Provider State:", state);
+  
   // NOTE: you *might* need to memoize this value
   // Learn more in http://kcd.im/optimize-context
   const value = { state, dispatch };

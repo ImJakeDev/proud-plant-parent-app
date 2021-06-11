@@ -1,17 +1,19 @@
 export interface InitState {
   plantparent: IPlantParent;
-}
-
-export interface IPlantParent {
-  firstname: string;
-  lastname: string;
-  nickname?: string;
-  plantparentid: number | null | undefined;
-  timeofparenthood: string;
   plantfamily?: IPlantFamily | null;
 }
 
+export interface IPlantParent {
+  __typename: string;
+  firstname: string;
+  lastname: string;
+  nickname?: string;
+  plantparentid: number | null;
+  timeofparenthood: string;
+}
+
 export interface IPlantFamily {
+  __typename: string;
   plantfamilyid: number | null;
   familyname: string;
   becamefamily: string;
@@ -20,6 +22,7 @@ export interface IPlantFamily {
 }
 
 export interface IPlantProfile {
+  __typename: string;
   plantprofileid: number | null;
   plantname: string;
   plantdetails?: string;
@@ -34,18 +37,22 @@ export interface IPlantProfile {
 
 export const initialState: InitState = {
   plantparent: {
+    __typename: "",
     firstname: "",
     lastname: "",
     nickname: "",
     plantparentid: null,
     timeofparenthood: "",
-    plantfamily: {
+  },
+  plantfamily: {
+      __typename: "",
       plantfamilyid: null,
       familyname: "",
       becamefamily: "",
       plantparentid: null,
       plantprofile: [
         {
+          __typename: "",
           plantprofileid: null,
           plantname: "",
           plantdetails: "",
@@ -59,5 +66,4 @@ export const initialState: InitState = {
         },
       ],
     },
-  },
 };

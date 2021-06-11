@@ -10,38 +10,44 @@ import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 
 interface IForm {
-  firstname: string;
-  lastname: string;
-  nickname?: string;
+  familyname: string;
+  plantparentid: number;
 }
 
 export default function FamilyForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
 
-  const { dispatch } = useProudPlantParent();
+  const {
+    dispatch,
+    state: {
+      plantparent: { plantparentid },
+    },
+  } = useProudPlantParent();
 
-  const [addPlantParent, { loading, error }] = useMutation(ADD_PLANT_PARENT);
+  const [addPlantFamily, { loading, error }] = useMutation(ADD_PLANT_FAMILY);
   const isMutationError = Boolean(error);
   const isMutationLoading = Boolean(loading);
 
   const onSubmit = (form: IForm) => {
+    console.log("Form object", form);
+    console.log("What is the plant parent id:", plantparentid);
+    
     const handleMutation = async (form: IForm) => {
-      const { data } = await addPlantParent({
+      const { data } = await addPlantFamily({
         variables: {
-          firstname: form.firstname,
-          lastname: form.lastname,
-          nickname: form.nickname,
+          familyname: form.familyname,
+          plantparentid: plantparentid
         },
       });
 
-      const stateObj = data.insert_plantparent.returning[0];
+      const stateObj = data.insert_plantfamily.returning[0];
       console.log("State Obj from response return:", stateObj);
 
-      const payload = { ...stateObj, plantfamily: null };
+      const payload = { ...stateObj };
       console.log("New payload obj:", payload);
 
-      dispatch({ type: ActionType.ADD_PLANT_PARENT, payload: payload });
+      dispatch({ type: ActionType.ADD_PLANT_FAMILY, payload: payload });
 
       !isMutationLoading && !isMutationError
         ? navigation.dispatch(
@@ -50,7 +56,7 @@ export default function FamilyForm() {
               routes: [{ name: "Root" }],
             })
           )
-        : console.error(error);
+        : console.error("This is the error:", error);
     };
     handleMutation(form);
   };
@@ -63,18 +69,10 @@ export default function FamilyForm() {
     <View>
       <FormProvider {...formMethods}>
         <FormInput
-          name="firstname"
-          label="First Name"
-          rules={{ required: "First Name is required!" }}
-          returnKeyType="next"
+          name="familyname"
+          label="Family Name"
+          rules={{ required: "Family Name is required!" }}
         />
-        <FormInput
-          name="lastname"
-          label="Last Name"
-          rules={{ required: "Last Name is required!" }}
-          returnKeyType="next"
-        />
-        <FormInput name="nickname" label="Nick Name" returnKeyType="next" />
       </FormProvider>
       {isMutationLoading ? (
         <ActivityIndicator size="large" color="#00ff00" />
@@ -89,21 +87,16 @@ export default function FamilyForm() {
   );
 }
 
-const ADD_PLANT_PARENT = gql`
-  mutation ($firstname: String!, $lastname: String!, $nickname: String!) {
-    insert_plantparent(
-      objects: {
-        firstname: $firstname
-        lastname: $lastname
-        nickname: $nickname
-      }
+const ADD_PLANT_FAMILY = gql`
+  mutation ($familyname: String!, $plantparentid: Int!) {
+    insert_plantfamily(
+      objects: { familyname: $familyname, plantparentid: $plantparentid }
     ) {
       returning {
-        firstname
-        lastname
-        nickname
+        becamefamily
+        familyname
+        plantfamilyid
         plantparentid
-        timeofparenthood
       }
     }
   }

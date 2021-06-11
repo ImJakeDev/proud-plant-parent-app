@@ -57,18 +57,7 @@ export default function HomeScreen() {
       {plantfamily === null ? (
         <Button
           title="Start a plant family!"
-          onPress={() =>
-            dispatch({
-              type: ActionType.ADD_PLANT_FAMILY,
-              payload: {
-                plantfamilyid: null,
-                familyname: "",
-                becamefamily: "",
-                plantparentid: null,
-                plantprofile: null,
-              },
-            })
-          }
+          onPress={() => navigation.navigate("Family")}
         />
       ) : (
         <Text>You have a family</Text>
