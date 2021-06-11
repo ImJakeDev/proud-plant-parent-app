@@ -1,5 +1,10 @@
 import React, { createContext, useReducer, useContext, Dispatch } from "react";
 
+import {
+  initialState as initstate,
+  InitState,
+} from "./state-management/init-state/Index";
+
 /*
   Todo: separate concerns!
   * Initial State:
@@ -55,14 +60,14 @@ export const initialState: IState = {
 };
 
 const ProudPlantParentContext = createContext<{
-  state: IState;
+  state: InitState;
   dispatch: Dispatch<IAction>;
 }>({
-  state: initialState,
+  state: initstate,
   dispatch: () => null,
 });
 
-export function proudPlantParentReducer(state: IState, action: IAction) {
+export function proudPlantParentReducer(state: InitState, action: IAction) {
   switch (action.type) {
     case "ADD_PLANT_PARENT":
       return { ...state, ...action.payload };

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, Alert } from "react-native";
+import { useNavigation, CommonActions } from "@react-navigation/native";
 
 import { useProudPlantParent } from "../global/proudPlantParentContext";
 import Button from "../components/Button";
@@ -16,6 +16,7 @@ export default function HomeScreen() {
         nickname,
         timeofparenthood,
         plantparentid,
+        plantfamily,
       },
     },
   } = useProudPlantParent();
@@ -32,10 +33,26 @@ export default function HomeScreen() {
       />
       <Button
         title="Go to welcome screen."
-        onPress={() => navigation.navigate("Welcome", { screen: "Welcome" })}
+        onPress={() =>
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: "Welcome" }],
+            })
+          )
+        }
       />
-      <Text>{firstname + " " + lastname}</Text>
-      <Text>Became a parent at: {timeofparenthood}</Text>
+      <View style={{ paddingBottom: 20 }}>
+        <Text>My full name is: {firstname + " " + lastname}</Text>
+        <Text>Call me: {nickname}</Text>
+        <Text>Became a parent at: {timeofparenthood}</Text>
+        <Text>{JSON.stringify(plantfamily, null, 3)}</Text>
+      </View>
+      <Button
+        title="What is my ID?"
+        onPress={() => Alert.alert(`Your ID: ${plantparentid}`)}
+      />
+      <Button title="Start a plant family!" onPress={() => null} />
     </View>
   );
 }

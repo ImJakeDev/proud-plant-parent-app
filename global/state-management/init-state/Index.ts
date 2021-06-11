@@ -8,7 +8,7 @@ export interface IPlantParent {
   nickname?: string;
   plantparentid: number | null;
   timeofparenthood: string;
-  plantfamily?: IPlantFamily;
+  plantfamily?: IPlantFamily | null;
 }
 
 export interface IPlantFamily {
