@@ -1,24 +1,18 @@
 import * as React from "react";
-import { StyleSheet, Alert } from "react-native";
-import { useNavigation, CommonActions } from "@react-navigation/native";
+import { StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-import { ActionType } from "../global/state-management/actions/Index";
 import { useProudPlantParent } from "../global/proudPlantParentContext";
 import Button from "../components/Button";
+import PlantChildren from "../components/PlantChildren";
 import { Text, View } from "../components/Themed";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
   const {
     state: {
-      plantparent: {
-        firstname,
-        lastname,
-        nickname,
-        timeofparenthood,
-        plantparentid,
-      },
-      plantfamily: { plantfamilyid, familyname, becamefamily, plantprofile },
+      plantparent: { firstname, lastname, nickname, timeofparenthood },
+      plantfamily: { plantfamilyid, familyname },
     },
   } = useProudPlantParent();
 
@@ -39,11 +33,11 @@ export default function HomeScreen() {
       </View>
       {plantfamilyid === null ? (
         <Button
-          title="Start a plant family!"
+          title="Start a plant family! 🌱"
           onPress={() => navigation.navigate("Family")}
         />
       ) : (
-        <Text>Family name: {familyname}</Text>
+        <PlantChildren />
       )}
     </View>
   );
