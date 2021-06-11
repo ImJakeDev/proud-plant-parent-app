@@ -1,6 +1,6 @@
 export interface InitState {
   plantparent: IPlantParent;
-  plantfamily?: IPlantFamily | null;
+  plantfamily: IPlantFamily;
 }
 
 export interface IPlantParent {
@@ -45,25 +45,26 @@ export const initialState: InitState = {
     timeofparenthood: "",
   },
   plantfamily: {
-      __typename: "",
-      plantfamilyid: null,
-      familyname: "",
-      becamefamily: "",
-      plantparentid: null,
-      plantprofile: [
-        {
-          __typename: "",
-          plantprofileid: null,
-          plantname: "",
-          plantdetails: "",
-          scientificname: "",
-          plantgenus: "",
-          plantspecies: "",
-          dateofbirth: "",
-          joinedfamilyat: "",
-          age: "",
-          plantfamilyid: null,
-        },
-      ],
-    },
+    __typename: "",
+    plantfamilyid: null,
+    familyname: "",
+    becamefamily: "",
+    plantparentid: null,
+    plantprofile: null,
+    // plantprofile: [
+    //   {
+    //     __typename: "",
+    //     plantprofileid: null,
+    //     plantname: "",
+    //     plantdetails: "",
+    //     scientificname: "",
+    //     plantgenus: "",
+    //     plantspecies: "",
+    //     dateofbirth: "",
+    //     joinedfamilyat: "",
+    //     age: "",
+    //     plantfamilyid: null,
+    //   },
+    // ],
+  },
 };

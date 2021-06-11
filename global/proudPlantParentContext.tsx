@@ -31,7 +31,7 @@ const ProudPlantParentContext = createContext<{
 export const ProudPlantParentProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(proudPlantParentReducer, initialState);
   console.log("Proud Plant Parent Provider State:", state);
-  
+
   // NOTE: you *might* need to memoize this value
   // Learn more in http://kcd.im/optimize-context
   const value = { state, dispatch };

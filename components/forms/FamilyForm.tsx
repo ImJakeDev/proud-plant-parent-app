@@ -32,12 +32,12 @@ export default function FamilyForm() {
   const onSubmit = (form: IForm) => {
     console.log("Form object", form);
     console.log("What is the plant parent id:", plantparentid);
-    
+
     const handleMutation = async (form: IForm) => {
       const { data } = await addPlantFamily({
         variables: {
           familyname: form.familyname,
-          plantparentid: plantparentid
+          plantparentid: plantparentid,
         },
       });
 

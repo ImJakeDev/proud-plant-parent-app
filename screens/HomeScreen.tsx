@@ -17,10 +17,9 @@ export default function HomeScreen() {
         nickname,
         timeofparenthood,
         plantparentid,
-        plantfamily,
       },
+      plantfamily: { plantfamilyid, familyname, becamefamily, plantprofile },
     },
-    dispatch,
   } = useProudPlantParent();
 
   return (
@@ -33,34 +32,18 @@ export default function HomeScreen() {
         lightColor="#e1e1e1"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <Button
-        title="Go to welcome screen."
-        onPress={() =>
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: "Welcome" }],
-            })
-          )
-        }
-      />
       <View style={{ paddingBottom: 20 }}>
         <Text>My full name is: {firstname + " " + lastname}</Text>
         <Text>Call me: {nickname}</Text>
         <Text>Became a parent at: {timeofparenthood}</Text>
-        <Text>{JSON.stringify(plantfamily, null, 3)}</Text>
       </View>
-      <Button
-        title="What is my ID?"
-        onPress={() => Alert.alert(`Your ID: ${plantparentid}`)}
-      />
-      {plantfamily === null ? (
+      {plantfamilyid === null ? (
         <Button
           title="Start a plant family!"
           onPress={() => navigation.navigate("Family")}
         />
       ) : (
-        <Text>You have a family</Text>
+        <Text>Family name: {familyname}</Text>
       )}
     </View>
   );
