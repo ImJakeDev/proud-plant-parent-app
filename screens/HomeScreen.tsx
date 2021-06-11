@@ -8,7 +8,17 @@ import { Text, View } from "../components/Themed";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-  const { state } = useProudPlantParent();
+  const {
+    state: {
+      plantparent: {
+        firstname,
+        lastname,
+        nickname,
+        timeofparenthood,
+        plantparentid,
+      },
+    },
+  } = useProudPlantParent();
 
   return (
     <View style={styles.container}>
@@ -24,7 +34,8 @@ export default function HomeScreen() {
         title="Go to welcome screen."
         onPress={() => navigation.navigate("Welcome", { screen: "Welcome" })}
       />
-      <Text>{JSON.stringify(state)}</Text>
+      <Text>{firstname + " " + lastname}</Text>
+      <Text>Became a parent at: {timeofparenthood}</Text>
     </View>
   );
 }
