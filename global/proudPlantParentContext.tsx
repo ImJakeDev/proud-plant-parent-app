@@ -1,9 +1,10 @@
 import React, { createContext, useReducer, useContext, Dispatch } from "react";
 
-import {
-  initialState as initstate,
-  InitState,
-} from "./state-management/init-state/Index";
+import { initialState, InitState } from "./state-management/init-state/Index";
+
+import { Actions } from "./state-management/actions/Index";
+
+import { proudPlantParentReducer } from "./state-management/reducers/Index";
 
 /*
   Todo: separate concerns!
@@ -21,61 +22,63 @@ import {
     - I like wrapping things in convenience hooks
 */
 
-export interface IState {
-  plantparent: {
-    __typename: string;
-    firstname: string;
-    lastname: string;
-    nickname?: string;
-    plantparentid: number | null;
-    timeofparenthood: string;
-  };
-}
+// export interface IState {
+//   plantparent: {
+//     __typename: string;
+//     firstname: string;
+//     lastname: string;
+//     nickname?: string;
+//     plantparentid: number | null;
+//     timeofparenthood: string;
+//   };
+// }
 
-export interface IAction {
-  type: string;
-  payload: IParent | undefined;
-}
+// export interface IAction {
+//   type: string;
+//   payload: IParent | undefined;
+// }
 
-export interface IParent {
-  plantparent: {
-    __typename: string;
-    firstname: string;
-    lastname: string;
-    nickname?: string;
-    plantparentid: number;
-    timeofparenthood: string;
-  };
-}
+// export interface IParent {
+//   plantparent: {
+//     __typename: string;
+//     firstname: string;
+//     lastname: string;
+//     nickname?: string;
+//     plantparentid: number;
+//     timeofparenthood: string;
+//   };
+// }
 
-export const initialState: IState = {
-  plantparent: {
-    __typename: "",
-    firstname: "",
-    lastname: "",
-    nickname: "",
-    plantparentid: null,
-    timeofparenthood: "",
-  },
-};
+// export interface IFamily {
+//   plantparent: {
+//     __typename: string;
+//     firstname: string;
+//     lastname: string;
+//     nickname?: string;
+//     plantparentid: number;
+//     timeofparenthood: string;
+//   };
+// }
 
 const ProudPlantParentContext = createContext<{
   state: InitState;
-  dispatch: Dispatch<IAction>;
+  dispatch: Dispatch<Actions>;
 }>({
-  state: initstate,
+  state: initialState,
   dispatch: () => null,
 });
 
-export function proudPlantParentReducer(state: InitState, action: IAction) {
-  switch (action.type) {
-    case "ADD_PLANT_PARENT":
-      return { ...state, ...action.payload };
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
-    }
-  }
-}
+// export function proudPlantParentReducer(state: InitState, action: IAction) {
+//   switch (action.type) {
+//     case "ADD_PLANT_PARENT":
+//       return { ...state, ...action.payload };
+//     case "ADD_PLANT_FAMILY":
+//       return { ...state, plantfamily: { ...action.payload } };
+//     default: {
+//       throw new Error(`Unhandled action type: ${action.type}`);
+//     }
+//   }
+// }
 
 export const ProudPlantParentProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(proudPlantParentReducer, initialState);

@@ -2,6 +2,7 @@ import * as React from "react";
 import { StyleSheet, Alert } from "react-native";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 
+import { ActionType } from "../global/state-management/actions/Index";
 import { useProudPlantParent } from "../global/proudPlantParentContext";
 import Button from "../components/Button";
 import { Text, View } from "../components/Themed";
@@ -19,6 +20,7 @@ export default function HomeScreen() {
         plantfamily,
       },
     },
+    dispatch,
   } = useProudPlantParent();
 
   return (
@@ -52,7 +54,25 @@ export default function HomeScreen() {
         title="What is my ID?"
         onPress={() => Alert.alert(`Your ID: ${plantparentid}`)}
       />
-      <Button title="Start a plant family!" onPress={() => null} />
+      {plantfamily === null ? (
+        <Button
+          title="Start a plant family!"
+          onPress={() =>
+            dispatch({
+              type: ActionType.ADD_PLANT_FAMILY,
+              payload: {
+                plantfamilyid: null,
+                familyname: "",
+                becamefamily: "",
+                plantparentid: null,
+                plantprofile: null,
+              },
+            })
+          }
+        />
+      ) : (
+        <Text>You have a family</Text>
+      )}
     </View>
   );
 }

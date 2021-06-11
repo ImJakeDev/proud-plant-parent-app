@@ -6,7 +6,7 @@ export interface IPlantParent {
   firstname: string;
   lastname: string;
   nickname?: string;
-  plantparentid: number | null;
+  plantparentid: number | null | undefined;
   timeofparenthood: string;
   plantfamily?: IPlantFamily | null;
 }
@@ -16,7 +16,7 @@ export interface IPlantFamily {
   familyname: string;
   becamefamily: string;
   plantparentid: number | null;
-  plantprofile?: IPlantProfile[];
+  plantprofile?: IPlantProfile[] | null;
 }
 
 export interface IPlantProfile {

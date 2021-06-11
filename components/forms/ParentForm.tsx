@@ -4,6 +4,8 @@ import { ActivityIndicator, View, Text } from "react-native";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 
+import { ActionType } from "../../global/state-management/actions/Index";
+import { IPlantParent } from "../../global/state-management/init-state/Index";
 import { useProudPlantParent } from "../../global/proudPlantParentContext";
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
@@ -37,10 +39,10 @@ export default function ParentForm() {
       const stateObj = data.insert_plantparent.returning[0];
       console.log("State Obj from response return:", stateObj);
 
-      const payload = { plantparent: { ...stateObj, plantfamily: null } };
+      const payload = { ...stateObj, plantfamily: null };
       console.log("New payload obj:", payload);
 
-      dispatch({ type: "ADD_PLANT_PARENT", payload: payload });
+      dispatch({ type: ActionType.ADD_PLANT_PARENT, payload: payload });
 
       !isMutationLoading && !isMutationError
         ? navigation.dispatch(
