@@ -1,7 +1,5 @@
 import React, { createContext, useReducer, useContext, Dispatch } from "react";
 
-import { IParent } from "../components/forms/ParentForm";
-
 /*
   Todo: separate concerns!
   * Initial State:
@@ -18,7 +16,7 @@ import { IParent } from "../components/forms/ParentForm";
     - I like wrapping things in convenience hooks
 */
 
-interface IState {
+export interface IState {
   plantparent: {
     __typename: string;
     firstname: string;
@@ -29,12 +27,23 @@ interface IState {
   };
 }
 
-interface IAction {
+export interface IAction {
   type: string;
   payload: IParent | undefined;
 }
 
-const initialState: IState = {
+export interface IParent {
+  plantparent: {
+    __typename: string;
+    firstname: string;
+    lastname: string;
+    nickname?: string;
+    plantparentid: number;
+    timeofparenthood: string;
+  };
+}
+
+export const initialState: IState = {
   plantparent: {
     __typename: "",
     firstname: "",
@@ -53,7 +62,7 @@ const ProudPlantParentContext = createContext<{
   dispatch: () => null,
 });
 
-function proudPlantParentReducer(state: IState, action: IAction) {
+export function proudPlantParentReducer(state: IState, action: IAction) {
   switch (action.type) {
     case "ADD_PLANT_PARENT":
       return { ...state, ...action.payload };
@@ -63,7 +72,7 @@ function proudPlantParentReducer(state: IState, action: IAction) {
   }
 }
 
-const ProudPlantParentProvider: React.FC = ({ children }) => {
+export const ProudPlantParentProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(proudPlantParentReducer, initialState);
   // NOTE: you *might* need to memoize this value
   // Learn more in http://kcd.im/optimize-context
@@ -75,7 +84,7 @@ const ProudPlantParentProvider: React.FC = ({ children }) => {
   );
 };
 
-function useProudPlantParent() {
+export function useProudPlantParent() {
   const context = useContext(ProudPlantParentContext);
   if (context === undefined) {
     throw new Error(
@@ -84,5 +93,3 @@ function useProudPlantParent() {
   }
   return context;
 }
-
-export { ProudPlantParentProvider, useProudPlantParent };

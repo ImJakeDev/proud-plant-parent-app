@@ -14,17 +14,6 @@ interface IForm {
   nickname?: string;
 }
 
-export interface IParent {
-  plantparent: {
-    __typename: string;
-    firstname: string;
-    lastname: string;
-    nickname?: string;
-    plantparentid: number;
-    timeofparenthood: string;
-  };
-}
-
 export default function ParentForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
