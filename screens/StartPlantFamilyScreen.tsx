@@ -1,12 +1,12 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
 
-import ParentForm from "../components/forms/ParentForm";
+import FamilyForm from "../components/forms/FamilyForm";
 
-export default function BecomeAPlantParentScreen() {
+export default function StartPlantFamilyScreen() {
   return (
     <View style={styles.container}>
-      <ParentForm />
+      <FamilyForm />
     </View>
   );
 }

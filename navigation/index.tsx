@@ -14,6 +14,7 @@ import { ColorSchemeName } from "react-native";
 
 import BecomingParentNavigator from "./BecomingParentNavigator";
 import BottomTabNavigator from "./BottomTabNavigator";
+import StartingFamilyNavigator from "./StartingFamilyNavigator";
 
 export default function Navigation({
   colorScheme,
@@ -32,7 +33,7 @@ export default function Navigation({
 type RootStackParamList = {
   Root: undefined;
   Welcome: undefined;
-  NotFound: undefined;
+  Family: undefined;
 };
 
 // A root stack navigator is often used for displaying modals on top of all other content
@@ -44,6 +45,7 @@ function RootNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Welcome" component={BecomingParentNavigator} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
+      <Stack.Screen name="Family" component={StartingFamilyNavigator} />
     </Stack.Navigator>
   );
 }

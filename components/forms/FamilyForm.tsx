@@ -15,7 +15,7 @@ interface IForm {
   nickname?: string;
 }
 
-export default function ParentForm() {
+export default function FamilyForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
 
