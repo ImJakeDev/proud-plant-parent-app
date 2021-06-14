@@ -6,8 +6,18 @@ import Button from "../components/Button";
 
 export default function AddPlantChildScreen() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Add plant child screeen.</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+});

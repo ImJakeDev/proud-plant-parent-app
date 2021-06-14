@@ -26,12 +26,12 @@ export interface IPlantProfile {
   plantprofileid: number | null;
   plantname: string;
   plantdetails?: string;
-  scientificname: string;
-  plantgenus: string;
-  plantspecies: string;
-  dateofbirth: string;
+  scientificname?: string;
+  plantgenus?: string;
+  plantspecies?: string;
+  dateofbirth?: string;
   joinedfamilyat: string;
-  age: string;
+  age?: string;
   plantfamilyid: number | null;
 }
 
