@@ -13,6 +13,7 @@ import useColorScheme from "../hooks/useColorScheme";
 import HomeScreen from "../screens/HomeScreen";
 import PlantParentScreen from "../screens/PlantParentScreen";
 import StartPlantFamilyScreen from "../screens/StartPlantFamilyScreen";
+import AddPlantChildScreen from "../screens/AddPlantChildScreen";
 
 type BottomTabParamList = {
   Home: undefined;
@@ -63,6 +64,7 @@ function TabBarIcon(props: {
 type TabOneParamList = {
   HomeScreen: undefined;
   StartPlantFamilyScreen: undefined;
+  AddPlantChildScreen: undefined;
 };
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -81,6 +83,11 @@ function HomeNavigator() {
         name="StartPlantFamilyScreen"
         component={StartPlantFamilyScreen}
         options={{ headerTitle: "Stating a Plant Family" }}
+      />
+      <HomeStack.Screen
+        name="AddPlantChildScreen"
+        component={AddPlantChildScreen}
+        options={{ headerTitle: "Add a Plant" }}
       />
     </HomeStack.Navigator>
   );

@@ -24,7 +24,7 @@ export default function PlantChildren() {
       ) : (
         <Button
           title="Add a plant to the fam. +🪴"
-          onPress={() => navigation.navigate("")}
+          onPress={() => navigation.navigate("AddPlantChildScreen")}
         />
       )}
     </View>
