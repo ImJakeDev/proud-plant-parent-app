@@ -30,7 +30,7 @@ export default function FamilyForm() {
   const isMutationLoading = Boolean(loading);
 
   const onSubmit = (form: IForm) => {
-    console.log("Form object", form);
+    // console.log("Form object", form);
     console.log("What is the plant parent id:", plantparentid);
 
     const handleMutation = async (form: IForm) => {
@@ -42,10 +42,10 @@ export default function FamilyForm() {
       });
 
       const stateObj = data.insert_plantfamily.returning[0];
-      console.log("State Obj from response return:", stateObj);
+      // console.log("State Obj from response return:", stateObj);
 
       const payload = { ...stateObj };
-      console.log("New payload obj:", payload);
+      // console.log("New payload obj:", payload);
 
       dispatch({ type: ActionType.ADD_PLANT_FAMILY, payload: payload });
 

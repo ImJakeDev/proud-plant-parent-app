@@ -9,18 +9,19 @@ export default function PlantChildren() {
   const navigation = useNavigation();
   const {
     state: {
-      plantfamily: { familyname, plantprofile },
+      plantfamily: { familyname },
+      plantpchildren,
     },
   } = useProudPlantParent();
 
-  const isPlantProfile = Boolean(plantprofile);
-  console.log(isPlantProfile);
+  // const isPlantProfile = Boolean(plantpchildren);
+  // console.log(isPlantProfile);
 
   return (
     <View>
       <Text>Family name: {familyname}</Text>
-      {isPlantProfile ? (
-        <Text>There sure is!</Text>
+      {plantpchildren?.length > 0 ? (
+        <Text>{JSON.stringify(plantpchildren)}</Text>
       ) : (
         <Button
           title="Add a plant to the fam. +🪴"

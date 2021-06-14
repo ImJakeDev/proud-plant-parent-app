@@ -16,8 +16,8 @@
     "plantname",
     "plantparent",
     "plantparentid",
-    "plantprofile",
-    "plantprofileid",
+    "plantpchildren",
+    "plantpchildid",
     "plantspecies",
     "scientificname",
     "timeofparenthood"

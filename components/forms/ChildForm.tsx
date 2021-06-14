@@ -30,6 +30,8 @@ export default function ChildForm() {
   const isMutationLoading = Boolean(loading);
 
   const onSubmit = (form: IForm) => {
+    console.log("What is the plant family id:", plantfamilyid);
+
     const handleMutation = async (form: IForm) => {
       const { data } = await addPlantChild({
         variables: {
@@ -93,7 +95,7 @@ const ADD_PLANT_CHILD = gql`
         plantfamilyid
         plantgenus
         plantname
-        plantprofileid
+        plantchildid
         plantspecies
         scientificname
       }

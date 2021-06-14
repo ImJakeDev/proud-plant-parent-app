@@ -36,10 +36,10 @@ export default function ParentForm() {
       });
 
       const stateObj = data.insert_plantparent.returning[0];
-      console.log("State Obj from response return:", stateObj);
+      // console.log("State Obj from response return:", stateObj);
 
       const payload = { ...stateObj, plantfamily: null };
-      console.log("New payload obj:", payload);
+      // console.log("New payload obj:", payload);
 
       dispatch({ type: ActionType.ADD_PLANT_PARENT, payload: payload });
 
