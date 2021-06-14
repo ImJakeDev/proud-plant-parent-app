@@ -1,8 +1,9 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { ActivityIndicator, View, Text } from "react-native";
+import { ActivityIndicator, View, Text, Image, Platform } from "react-native";
 import { gql, useMutation } from "@apollo/client";
-import { useNavigation, CommonActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from 'expo-image-picker';
 
 import { ActionType } from "../../global/state-management/actions/Index";
 import { useProudPlantParent } from "../../global/proudPlantParentContext";
@@ -18,6 +19,12 @@ export default function ChildForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
 
+  const [image, setImage] = React.useState(null);
+
+  const [addPlantChild, { loading, error }] = useMutation(ADD_PLANT_CHILD);
+  const isMutationError = Boolean(error);
+  const isMutationLoading = Boolean(loading);
+
   const {
     dispatch,
     state: {
@@ -25,9 +32,31 @@ export default function ChildForm() {
     },
   } = useProudPlantParent();
 
-  const [addPlantChild, { loading, error }] = useMutation(ADD_PLANT_CHILD);
-  const isMutationError = Boolean(error);
-  const isMutationLoading = Boolean(loading);
+  React.useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
 
   const onSubmit = (form: IForm) => {
     console.log("What is the plant family id:", plantfamilyid);
@@ -62,6 +91,8 @@ export default function ChildForm() {
   return (
     <View>
       <FormProvider {...formMethods}>
+        <Button title="Pick an image from camera roll" onPress={pickImage} />
+        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
         <FormInput
           name="plantname"
           label="Plant Name"
