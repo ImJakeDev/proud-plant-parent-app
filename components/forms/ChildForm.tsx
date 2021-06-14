@@ -3,7 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ActivityIndicator, View, Text, Image, Platform } from "react-native";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 
 import { ActionType } from "../../global/state-management/actions/Index";
 import { useProudPlantParent } from "../../global/proudPlantParentContext";
@@ -34,10 +34,11 @@ export default function ChildForm() {
 
   React.useEffect(() => {
     (async () => {
-      if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
         }
       }
     })();
@@ -92,7 +93,9 @@ export default function ChildForm() {
     <View>
       <FormProvider {...formMethods}>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        {image && (
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+        )}
         <FormInput
           name="plantname"
           label="Plant Name"
