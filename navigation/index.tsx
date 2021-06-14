@@ -14,7 +14,6 @@ import { ColorSchemeName } from "react-native";
 
 import BecomingParentNavigator from "./BecomingParentNavigator";
 import BottomTabNavigator from "./BottomTabNavigator";
-import StartingFamilyNavigator from "./StartingFamilyNavigator";
 
 export default function Navigation({
   colorScheme,
@@ -45,7 +44,6 @@ function RootNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Welcome" component={BecomingParentNavigator} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
-      <Stack.Screen name="Family" component={StartingFamilyNavigator} />
     </Stack.Navigator>
   );
 }

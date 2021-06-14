@@ -12,6 +12,7 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import HomeScreen from "../screens/HomeScreen";
 import PlantParentScreen from "../screens/PlantParentScreen";
+import StartPlantFamilyScreen from "../screens/StartPlantFamilyScreen";
 
 type BottomTabParamList = {
   Home: undefined;
@@ -30,7 +31,7 @@ export default function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="Home"
-        component={TabOneNavigator}
+        component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }: any) => (
             <TabBarIcon name="ios-code" color={color} />
@@ -39,7 +40,7 @@ export default function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="PlantParent"
-        component={TabTwoNavigator}
+        component={PlantParentNavigator}
         options={{
           tabBarIcon: ({ color }: any) => (
             <TabBarIcon name="ios-code" color={color} />
@@ -61,21 +62,27 @@ function TabBarIcon(props: {
 
 type TabOneParamList = {
   HomeScreen: undefined;
+  StartPlantFamilyScreen: undefined;
 };
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const HomeStack = createStackNavigator<TabOneParamList>();
 
-function TabOneNavigator() {
+function HomeNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
+    <HomeStack.Navigator>
+      <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{ headerTitle: "Proud Plant Parent" }}
       />
-    </TabOneStack.Navigator>
+      <HomeStack.Screen
+        name="StartPlantFamilyScreen"
+        component={StartPlantFamilyScreen}
+        options={{ headerTitle: "Stating a Plant Family" }}
+      />
+    </HomeStack.Navigator>
   );
 }
 
@@ -83,16 +90,16 @@ type TabTwoParamList = {
   PlantParentScreen: undefined;
 };
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const PlantParentStack = createStackNavigator<TabTwoParamList>();
 
-function TabTwoNavigator() {
+function PlantParentNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
+    <PlantParentStack.Navigator>
+      <PlantParentStack.Screen
         name="PlantParentScreen"
         component={PlantParentScreen}
         options={{ headerTitle: "Plant Parent" }}
       />
-    </TabTwoStack.Navigator>
+    </PlantParentStack.Navigator>
   );
 }

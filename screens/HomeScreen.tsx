@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, CommonActions } from "@react-navigation/native";
 
 import { useProudPlantParent } from "../global/proudPlantParentContext";
 import Button from "../components/Button";
@@ -34,7 +34,9 @@ export default function HomeScreen() {
       {plantfamilyid === null ? (
         <Button
           title="Start a plant family! 🌱"
-          onPress={() => navigation.navigate("Family")}
+          onPress={() =>
+            navigation.navigate("StartPlantFamilyScreen")
+          }
         />
       ) : (
         <PlantChildren />
