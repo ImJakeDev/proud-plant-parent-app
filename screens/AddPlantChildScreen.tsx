@@ -6,7 +6,7 @@ import ChildForm from "../components/forms/ChildForm";
 export default function AddPlantChildScreen() {
   return (
     <View style={styles.container}>
-      <ChildForm/>
+      <ChildForm />
     </View>
   );
 }

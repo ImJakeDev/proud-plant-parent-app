@@ -18,10 +18,10 @@ export interface IPlantFamily {
   familyname: string;
   becamefamily: string;
   plantparentid: number | null;
-  plantprofile?: IPlantProfile[] | null;
+  plantprofile?: IPlantChild[] | null;
 }
 
-export interface IPlantProfile {
+export interface IPlantChild {
   __typename: string;
   plantprofileid: number | null;
   plantname: string;
