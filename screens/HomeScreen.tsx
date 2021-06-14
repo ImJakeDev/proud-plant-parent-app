@@ -34,9 +34,7 @@ export default function HomeScreen() {
       {plantfamilyid === null ? (
         <Button
           title="Start a plant family! 🌱"
-          onPress={() =>
-            navigation.navigate("StartPlantFamilyScreen")
-          }
+          onPress={() => navigation.navigate("StartPlantFamilyScreen")}
         />
       ) : (
         <PlantChildren />
