@@ -1,13 +1,12 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, View } from "react-native";
 
-import Button from "../components/Button";
+import ChildForm from "../components/forms/ChildForm";
 
 export default function AddPlantChildScreen() {
   return (
     <View style={styles.container}>
-      <Text>Add plant child screeen.</Text>
+      <ChildForm/>
     </View>
   );
 }
