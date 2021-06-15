@@ -9,6 +9,7 @@ import { ActionType } from "../../global/state-management/actions/Index";
 import { useProudPlantParent } from "../../global/proudPlantParentContext";
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
+import PlantId from "../PlantId";
 
 interface IForm {
   plantname: string;
@@ -20,9 +21,10 @@ export default function ChildForm() {
   const navigation = useNavigation();
 
   const [image, setImage] = React.useState(null);
+  const [base64, setBase64] = React.useState(null);
 
-  const [addPlantChild, { loading, error }] = useMutation(ADD_PLANT_CHILD);
-  const isMutationError = Boolean(error);
+  const [addPlantChild, { loading, error: mutationError }] = useMutation(ADD_PLANT_CHILD);
+  const isMutationError = Boolean(mutationError);
   const isMutationLoading = Boolean(loading);
 
   const {
@@ -48,14 +50,16 @@ export default function ChildForm() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
+      base64: true,
       aspect: [4, 3],
       quality: 1,
     });
 
-    console.log(result);
+    console.log("What is the result of the ImagePicker launchImageLibraryAsync base64", JSON.stringify(result));
 
     if (!result.cancelled) {
       setImage(result.uri);
+      setBase64(result.base64)
     }
   };
 
@@ -80,7 +84,7 @@ export default function ChildForm() {
 
       !isMutationLoading && !isMutationError
         ? navigation.goBack()
-        : console.error(error);
+        : console.error(mutationError);
     };
     handleMutation(form);
   };
@@ -89,12 +93,13 @@ export default function ChildForm() {
     console.warn(errors);
   };
 
+
   return (
     <View>
       <FormProvider {...formMethods}>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+        {image && base64 &&(
+          <PlantId image={image} base64={base64} />
         )}
         <FormInput
           name="plantname"
@@ -111,7 +116,7 @@ export default function ChildForm() {
           onPress={formMethods.handleSubmit(onSubmit, onErrors)}
         />
       )}
-      {isMutationError && <Text>{error?.message}</Text>}
+      {isMutationError && <Text>{mutationError?.message}</Text>}
     </View>
   );
 }

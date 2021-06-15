@@ -1,12 +1,15 @@
 import { useQuery } from "react-query";
 import { PLANT_ID_API_KEY } from "@env";
 
-const getPlantIdData = async (image: string) => {
+const getPlantIdData = async (image: string|null) => {
+  if (image===null) return 
+
   const base64files = image; // Might be an array of strings...
+  console.log("What is the base64 image?", image);
 
   const data = {
     api_key: PLANT_ID_API_KEY,
-    images: base64files,
+    images: [image],
     modifiers: ["crops_fast", "similar_images"],
     plant_language: "en",
     plant_details: [
@@ -34,6 +37,6 @@ const getPlantIdData = async (image: string) => {
   return res;
 };
 
-export default function usePlantId(image: string) {
-  return useQuery(["plantId-data", image], () => getPlantIdData(image));
+export default function usePlantId(image: string|null) {
+  return useQuery<Error>(["plantId-data", image], () => getPlantIdData(image));
 }

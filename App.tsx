@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { PROUD_PLANT_PARENT_ENDPOINT, X_HASURA_ADMIN_SECRET } from "@env";
 
 import { ProudPlantParentProvider } from "./global/proudPlantParentContext";
@@ -19,6 +20,8 @@ const client = new ApolloClient({
   },
 });
 
+const queryClient = new QueryClient();
+
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
@@ -29,10 +32,12 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <ApolloProvider client={client}>
-          <ProudPlantParentProvider>
-            <Navigation colorScheme={colorScheme} />
-          </ProudPlantParentProvider>
-          <StatusBar />
+          <QueryClientProvider client={queryClient}>
+            <ProudPlantParentProvider>
+              <Navigation colorScheme={colorScheme} />
+            </ProudPlantParentProvider>
+            <StatusBar />
+          </QueryClientProvider>
         </ApolloProvider>
       </SafeAreaProvider>
     );
