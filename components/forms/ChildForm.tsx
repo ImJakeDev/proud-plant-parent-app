@@ -56,11 +56,6 @@ export default function ChildForm() {
       quality: 1,
     });
 
-    console.log(
-      "What is the result of the ImagePicker launchImageLibraryAsync",
-      JSON.stringify(result)
-    );
-
     if (!result.cancelled) {
       setImage(result.uri);
       result.base64 ? setBase64(result.base64) : setBase64("");

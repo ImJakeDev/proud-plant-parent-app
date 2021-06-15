@@ -3,8 +3,6 @@ import { PLANT_ID_API_KEY } from "@env";
 import IPlantIdRes from "../Types/IPlantIdRes";
 
 const getPlantIdData = async (image: string | null) => {
-  console.log("What is the base64 image?", image);
-
   if (image && image.length > 0) {
     const data = {
       api_key: PLANT_ID_API_KEY,

@@ -31,8 +31,6 @@ const initialState = {
 export default function PlantId(props: IPlantId) {
   const [plantIdChild, setPlantIdChild] = useState<IPlantIdChild>(initialState);
 
-  console.log("Props base64", props.base64);
-
   const base64Image = props.base64.length > 0 ? props.base64 : null;
 
   const { data, isLoading, isError, error, status } = usePlantId(base64Image);
@@ -56,14 +54,19 @@ export default function PlantId(props: IPlantId) {
 
   return (
     <View>
-      {props.image && (
+      {(props.image) ? (
         <Image
           source={{ uri: props.image }}
           style={{ width: 200, height: 200 }}
         />
+      ) : (
+        <ActivityIndicator size="large" color="#55a630" />
       )}
       {isLoading ? (
-        <ActivityIndicator size="large" color="Green" />
+        <View>
+          <Text>🤖 AI Is Loading Data of Plant Info...</Text>
+          <ActivityIndicator size="large" color="#55a630" />
+        </View>
       ) : (
         <View>
           <Text>{status}</Text>
