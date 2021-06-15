@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ActivityIndicator, View, Text, Image, ScrollView } from "react-native";
 
 import usePlantId from "../hooks/usePlantId";
@@ -31,23 +31,44 @@ const initialState = {
 export default function PlantId(props: IPlantId) {
   const [plantIdChild, setPlantIdChild] = useState<IPlantIdChild>(initialState);
 
-  const { data, isLoading, isError, error, status } = usePlantId(props.base64);
+  console.log("Props base64", props.base64);
+  
+  const base64Image = props.base64.length > 0 ? props.base64 : null;
 
-  const handleDataToState = (data: IPlantIdRes | undefined) => {
-    if (!data) return plantIdChild;
+  const { data, isLoading, isError, error, status } = usePlantId(base64Image);
 
-    const newPlantIdChildState: IPlantIdChild = {
-      plantname: data.suggestions[0].plant_name || "",
-      plantnickname: "",
-      plantdetails: "",
-      scientificname: data.suggestions[0].plant_details.scientific_name,
-      plantgenus: data.suggestions[0].plant_details.structured_name.genus,
-      plantspecies: data.suggestions[0].plant_details.structured_name.species,
+  useEffect(() => {
+    const handleDataToState = (data: IPlantIdRes | undefined) => {
+      if (!data) return plantIdChild;
+
+      const newPlantIdChildState: IPlantIdChild = {
+        plantname: data.suggestions[0].plant_name || "",
+        plantnickname: "",
+        plantdetails: "",
+        scientificname: data.suggestions[0].plant_details.scientific_name,
+        plantgenus: data.suggestions[0].plant_details.structured_name.genus,
+        plantspecies: data.suggestions[0].plant_details.structured_name.species,
+      };
+      setPlantIdChild(newPlantIdChildState);
     };
-    setPlantIdChild(newPlantIdChildState);
-  };
+    !isLoading && handleDataToState(data);
+  }, [isLoading]);
 
-  !isLoading && handleDataToState(data);
+  // const handleDataToState = (data: IPlantIdRes | undefined) => {
+  //   if (!data) return plantIdChild;
+
+  //   const newPlantIdChildState: IPlantIdChild = {
+  //     plantname: data.suggestions[0].plant_name || "",
+  //     plantnickname: "",
+  //     plantdetails: "",
+  //     scientificname: data.suggestions[0].plant_details.scientific_name,
+  //     plantgenus: data.suggestions[0].plant_details.structured_name.genus,
+  //     plantspecies: data.suggestions[0].plant_details.structured_name.species,
+  //   };
+  //   setPlantIdChild(newPlantIdChildState);
+  // };
+
+  // !isLoading && handleDataToState(data);
 
   return (
     <View>
