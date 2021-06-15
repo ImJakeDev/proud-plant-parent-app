@@ -25,6 +25,7 @@ export interface IPlantChild {
   __typename: string;
   plantpchildid: number | null;
   plantname: string;
+  plantnickname?: string;
   plantdetails?: string;
   scientificname?: string;
   plantgenus?: string;
