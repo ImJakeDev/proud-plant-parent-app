@@ -23,7 +23,8 @@ export default function ChildForm() {
   const [image, setImage] = React.useState<string>("");
   const [base64, setBase64] = React.useState<string>("");
 
-  const [addPlantChild, { loading, error: mutationError }] = useMutation(ADD_PLANT_CHILD);
+  const [addPlantChild, { loading, error: mutationError }] =
+    useMutation(ADD_PLANT_CHILD);
   const isMutationError = Boolean(mutationError);
   const isMutationLoading = Boolean(loading);
 
@@ -55,11 +56,14 @@ export default function ChildForm() {
       quality: 1,
     });
 
-    console.log("What is the result of the ImagePicker launchImageLibraryAsync", JSON.stringify(result));
+    console.log(
+      "What is the result of the ImagePicker launchImageLibraryAsync",
+      JSON.stringify(result)
+    );
 
     if (!result.cancelled) {
       setImage(result.uri);
-      result.base64?setBase64(result.base64):setBase64("")
+      result.base64 ? setBase64(result.base64) : setBase64("");
     }
   };
 
@@ -93,14 +97,11 @@ export default function ChildForm() {
     console.warn(errors);
   };
 
-
   return (
     <View>
       <FormProvider {...formMethods}>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {image &&(
-          <PlantId image={image} base64={base64} />
-        )}
+        {Boolean(image) && <PlantId image={image} base64={base64} />}
         <FormInput
           name="plantname"
           label="Plant Name"
