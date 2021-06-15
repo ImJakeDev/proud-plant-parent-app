@@ -3,9 +3,8 @@ import { PLANT_ID_API_KEY } from "@env";
 import IPlantIdRes from "../Types/IPlantIdRes";
 
 const getPlantIdData = async (image: string | null) => {
-  if (!image) throw new Error("Base64 image is an empty string.");
-
   console.log("What is the base64 image?", image);
+  if (!image) throw new Error("Base64 image is an empty string.");
 
   const data = {
     api_key: PLANT_ID_API_KEY,
