@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import { PLANT_ID_API_KEY } from "@env";
+import IPlantIdRes from "../Types/IPlantIdRes";
 
 const getPlantIdData = async (image: string | null) => {
-  if (image === "") throw new Error("Base64 image is an empty string.");
+  if (!image) throw new Error("Base64 image is an empty string.");
 
-  const base64files = image; // Might be an array of strings...
   console.log("What is the base64 image?", image);
 
   const data = {
@@ -38,7 +38,7 @@ const getPlantIdData = async (image: string | null) => {
 };
 
 export default function usePlantId(image: string | null) {
-  return useQuery<string | null[], Error>(["plantId-data", image], () =>
+  return useQuery<IPlantIdRes, Error>(["plantId-data", image], () =>
     getPlantIdData(image)
   );
 }

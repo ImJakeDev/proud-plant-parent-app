@@ -3,10 +3,11 @@ import { useState } from "react";
 import { ActivityIndicator, View, Text, Image, ScrollView } from "react-native";
 
 import usePlantId from "../hooks/usePlantId";
+import IPlantIdRes from "../Types/IPlantIdRes";
 
 interface IPlantId {
   image: string | null;
-  base64: string | null;
+  base64: string;
 }
 
 interface IPlantIdChild {
@@ -31,22 +32,38 @@ export default function PlantId(props: IPlantId) {
   const [plantIdChild, setPlantIdChild] = useState<IPlantIdChild>(initialState);
 
   const { data, isLoading, isError, error, status } = usePlantId(props.base64);
-  isLoading ? console.log("status is ~>>----->", status) : console.log("data is ~>>----->", data)
+
+  const handleDataToState = (data: IPlantIdRes | undefined) => {
+    if (!data) return plantIdChild;
+
+    const newPlantIdChildState: IPlantIdChild = {
+      plantname: data.suggestions[0].plant_name || "",
+      plantnickname: "",
+      plantdetails: "",
+      scientificname: data.suggestions[0].plant_details.scientific_name,
+      plantgenus: data.suggestions[0].plant_details.structured_name.genus,
+      plantspecies: data.suggestions[0].plant_details.structured_name.species,
+    };
+    setPlantIdChild(newPlantIdChildState);
+  };
+
+  !isLoading && handleDataToState(data);
 
   return (
     <View>
-      {props.image ? (
+      {props.image && (
         <Image
           source={{ uri: props.image }}
           style={{ width: 200, height: 200 }}
         />
-      ) : (
-        <ActivityIndicator size="large" color="Green" />
       )}
       {isLoading ? (
         <ActivityIndicator size="large" color="Green" />
       ) : (
-        <Text>{status}</Text>
+        <View>
+          <Text>{status}</Text>
+          <Text>{JSON.stringify(plantIdChild)}</Text>
+        </View>
       )}
       {isError && <Text>{error?.message}</Text>}
     </View>
