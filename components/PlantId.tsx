@@ -31,6 +31,7 @@ export default function PlantId(props: IPlantId) {
   const [plantIdChild, setPlantIdChild] = useState<IPlantIdChild>(initialState);
 
   const { data, isLoading, isError, error, status } = usePlantId(props.base64);
+  isLoading ? console.log("status is ~>>----->", status) : console.log("data is ~>>----->", data)
 
   return (
     <View>
