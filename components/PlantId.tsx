@@ -32,7 +32,7 @@ export default function PlantId(props: IPlantId) {
   const [plantIdChild, setPlantIdChild] = useState<IPlantIdChild>(initialState);
 
   console.log("Props base64", props.base64);
-  
+
   const base64Image = props.base64.length > 0 ? props.base64 : null;
 
   const { data, isLoading, isError, error, status } = usePlantId(base64Image);
@@ -53,22 +53,6 @@ export default function PlantId(props: IPlantId) {
     };
     !isLoading && handleDataToState(data);
   }, [isLoading]);
-
-  // const handleDataToState = (data: IPlantIdRes | undefined) => {
-  //   if (!data) return plantIdChild;
-
-  //   const newPlantIdChildState: IPlantIdChild = {
-  //     plantname: data.suggestions[0].plant_name || "",
-  //     plantnickname: "",
-  //     plantdetails: "",
-  //     scientificname: data.suggestions[0].plant_details.scientific_name,
-  //     plantgenus: data.suggestions[0].plant_details.structured_name.genus,
-  //     plantspecies: data.suggestions[0].plant_details.structured_name.species,
-  //   };
-  //   setPlantIdChild(newPlantIdChildState);
-  // };
-
-  // !isLoading && handleDataToState(data);
 
   return (
     <View>

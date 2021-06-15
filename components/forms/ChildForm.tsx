@@ -101,7 +101,9 @@ export default function ChildForm() {
     <View>
       <FormProvider {...formMethods}>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {Boolean(image) && Boolean(base64) && <PlantId image={image} base64={base64} />}
+        {Boolean(image) && Boolean(base64) && (
+          <PlantId image={image} base64={base64} />
+        )}
         <FormInput
           name="plantname"
           label="Plant Name"
