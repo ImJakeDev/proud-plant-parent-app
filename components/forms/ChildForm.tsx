@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { ActivityIndicator, View, Text, Platform } from "react-native";
+import { ActivityIndicator, View, Text, Platform, Image } from "react-native";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
@@ -150,7 +150,11 @@ export default function ChildForm() {
     <View>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
 
-      {Boolean(isURI) && Boolean(isBase64) && (
+      {isURI && (
+        <Image source={{ uri: localState.picked_image.uri }} style={{ width: 200, height: 200 }} />
+      )}
+
+      {isBase64 && (
         <PlantId localState={localState} setLocalState={setLocalState} />
       )}
 

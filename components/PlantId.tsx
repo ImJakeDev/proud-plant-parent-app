@@ -15,14 +15,14 @@ interface IPlantId {
 export default function PlantId(props: IPlantId) {
   const {
     localState: {
-      picked_image: { base64, uri },
+      picked_image: { base64 },
       plant_info,
     },
     localState,
     setLocalState,
   } = props;
 
-  const { data, isLoading, isError, error, status } = usePlantId(base64);
+  const { data, isLoading, isError, isSuccess, error } = usePlantId(base64);
 
   useEffect(() => {
     const handleDataToState = (data: IPlantIdRes | undefined) => {
@@ -44,25 +44,19 @@ export default function PlantId(props: IPlantId) {
 
       setLocalState(newPlantInfoState);
     };
-    
+
     !isLoading && handleDataToState(data);
   }, [isLoading]);
 
   return (
     <View>
-      {uri ? (
-        <Image source={{ uri: uri }} style={{ width: 200, height: 200 }} />
-      ) : (
-        <ActivityIndicator size="large" color="#55a630" />
-      )}
-      {isLoading ? (
+      {isLoading && (
         <View>
           <Text>🤖 AI Is Loading Data of Plant Info...</Text>
           <ActivityIndicator size="large" color="#55a630" />
         </View>
-      ) : (
-        <Text>{status}</Text>
       )}
+      {isSuccess && <Text>✅</Text>}
       {isError && <Text>{error?.message}</Text>}
     </View>
   );
