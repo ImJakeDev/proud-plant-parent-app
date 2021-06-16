@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 
+import Button from './Button'
+
 export default function App() {
+  const [camera, setCamera] = useState<any | null>(null);
   const [hasPermission, setHasPermission] = useState<boolean|null>(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
@@ -19,21 +22,24 @@ export default function App() {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
+  const takePicture = async() => {
+    if (!camera) return
+    const photo = await camera.takePictureAsync({
+      base64: true,
+      quality: 1,
+    })
+    console.log(photo);
+    
+  }
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
+      <Camera style={styles.camera} type={type} ref={(ref) => setCamera(ref)}>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}>
-            <Text style={styles.text}> Flip </Text>
-          </TouchableOpacity>
+          <Button
+            title="Take Picture"
+            onPress={takePicture}
+          />
         </View>
       </Camera>
     </View>
@@ -52,11 +58,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     flexDirection: 'row',
     margin: 20,
-  },
-  button: {
-    flex: 0.1,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignContent: "flex-end"
   },
   text: {
     fontSize: 18,
