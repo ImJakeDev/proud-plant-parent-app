@@ -153,8 +153,6 @@ export default function ChildForm() {
     <View>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
 
-      {/* <Button title="Take a picture of a plant" onPress={() => navigation.navigate("CameraScreen")} /> */}
-
       <Button title="Take a picture of a plant" onPress={() => setIsCameraReady(true)} />
 
       {isCameraReady && <Camera/>}
