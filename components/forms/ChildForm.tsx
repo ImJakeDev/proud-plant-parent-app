@@ -13,9 +13,7 @@ import Button from "../Button";
 import PlantId from "../PlantId";
 
 interface IForm {
-  // plantname: string;
   plantnickname?: string;
-  // plantfamilyid: number;
 }
 
 export interface ILocalState {
@@ -102,8 +100,8 @@ export default function ChildForm() {
       const newPickedImage = {
         ...localState,
         picked_image: {
-          base64: result.uri,
-          uri: result.base64 || "",
+          base64: result.base64 || "",
+          uri: result.uri,
         },
       };
       setLocalState(newPickedImage);
@@ -139,6 +137,7 @@ export default function ChildForm() {
         ? navigation.goBack()
         : console.error(mutationError);
     };
+    
     handleMutation(form);
   };
 
@@ -162,7 +161,6 @@ export default function ChildForm() {
         <FormInput
           name="plantnickname"
           label="Plant Nick Name"
-          // rules={{ required: "Plant Name is required!" }}
           returnKeyType="next"
         />
       </FormProvider>

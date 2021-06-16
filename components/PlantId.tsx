@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { ActivityIndicator, View, Text, Image, ScrollView } from "react-native";
 
 import usePlantId from "../hooks/usePlantId";
@@ -13,6 +13,7 @@ interface IPlantId {
 }
 
 export default function PlantId(props: IPlantId) {
+  
   const base64Image =
     props.localState.picked_image.base64.length > 0
       ? props.localState.picked_image.base64
