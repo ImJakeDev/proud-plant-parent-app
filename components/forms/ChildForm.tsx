@@ -137,7 +137,7 @@ export default function ChildForm() {
         ? navigation.goBack()
         : console.error(mutationError);
     };
-    
+
     handleMutation(form);
   };
 
@@ -151,10 +151,7 @@ export default function ChildForm() {
       <Button title="Pick an image from camera roll" onPress={pickImage} />
 
       {Boolean(isURI) && Boolean(isBase64) && (
-        <PlantId
-          localState={localState}
-          setLocalState={setLocalState}
-        />
+        <PlantId localState={localState} setLocalState={setLocalState} />
       )}
 
       <FormProvider {...formMethods}>

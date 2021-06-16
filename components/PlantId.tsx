@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { ActivityIndicator, View, Text, Image, ScrollView } from "react-native";
+import { ActivityIndicator, View, Text, Image } from "react-native";
 
 import usePlantId from "../hooks/usePlantId";
 import IPlantIdRes from "../Types/IPlantIdRes";
@@ -13,20 +13,23 @@ interface IPlantId {
 }
 
 export default function PlantId(props: IPlantId) {
-  
-  const base64Image =
-    props.localState.picked_image.base64.length > 0
-      ? props.localState.picked_image.base64
-      : null;
+  const {
+    localState: {
+      picked_image: { base64, uri },
+      plant_info,
+    },
+    localState,
+    setLocalState,
+  } = props;
 
-  const { data, isLoading, isError, error, status } = usePlantId(base64Image);
+  const { data, isLoading, isError, error, status } = usePlantId(base64);
 
   useEffect(() => {
     const handleDataToState = (data: IPlantIdRes | undefined) => {
-      if (!data) return props.localState.plant_info;
+      if (!data) return plant_info;
 
       const newPlantInfoState: ILocalState = {
-        ...props.localState,
+        ...localState,
         plant_info: {
           plantname: data.suggestions[0].plant_name,
           plantnickname: "",
@@ -39,18 +42,16 @@ export default function PlantId(props: IPlantId) {
         },
       };
 
-      props.setLocalState(newPlantInfoState);
+      setLocalState(newPlantInfoState);
     };
+    
     !isLoading && handleDataToState(data);
   }, [isLoading]);
 
   return (
     <View>
-      {props.localState.picked_image.uri ? (
-        <Image
-          source={{ uri: props.localState.picked_image.uri }}
-          style={{ width: 200, height: 200 }}
-        />
+      {uri ? (
+        <Image source={{ uri: uri }} style={{ width: 200, height: 200 }} />
       ) : (
         <ActivityIndicator size="large" color="#55a630" />
       )}
