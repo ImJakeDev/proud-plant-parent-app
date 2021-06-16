@@ -8,7 +8,7 @@ import IPlantIdRes from "../Types/IPlantIdRes";
 interface IPlantId {
   image: string | null;
   base64: string;
-  setPlantIdChild: (arg0:IPlantIdChild)=>void;
+  setPlantIdChild: (arg0: IPlantIdChild) => void;
   plantIdChild: IPlantIdChild;
 }
 
@@ -56,7 +56,7 @@ export default function PlantId(props: IPlantId) {
 
   return (
     <View>
-      {(props.image) ? (
+      {props.image ? (
         <Image
           source={{ uri: props.image }}
           style={{ width: 200, height: 200 }}

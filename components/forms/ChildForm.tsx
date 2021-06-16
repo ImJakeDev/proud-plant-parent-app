@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { ActivityIndicator, View, Text, Image, Platform } from "react-native";
+import { ActivityIndicator, View, Text, Platform } from "react-native";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
@@ -40,7 +40,8 @@ export default function ChildForm() {
 
   const [image, setImage] = React.useState<string>("");
   const [base64, setBase64] = React.useState<string>("");
-  const [plantIdChild, setPlantIdChild] = React.useState<IPlantIdChild>(initialState);
+  const [plantIdChild, setPlantIdChild] =
+    React.useState<IPlantIdChild>(initialState);
 
   const [addPlantChild, { loading, error: mutationError }] =
     useMutation(ADD_PLANT_CHILD);
@@ -117,8 +118,15 @@ export default function ChildForm() {
         <Button title="Pick an image from camera roll" onPress={pickImage} />
         {Boolean(image) && Boolean(base64) && (
           <View>
-            <PlantId image={image} base64={base64} plantIdChild={plantIdChild} setPlantIdChild={setPlantIdChild} />
-            <Text>{JSON.stringify(plantIdChild)}</Text>
+            <PlantId
+              image={image}
+              base64={base64}
+              plantIdChild={plantIdChild}
+              setPlantIdChild={setPlantIdChild}
+            />
+            {plantIdChild !== initialState && (
+              <Text>{JSON.stringify(plantIdChild)}</Text>
+            )}
           </View>
         )}
         <FormInput
