@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { ActivityIndicator, View, Text, Platform } from "react-native";
 import { gql, useMutation } from "@apollo/client";
@@ -10,7 +11,6 @@ import { useProudPlantParent } from "../../global/state-management/context/index
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 import PlantId from "../PlantId";
-import PlantChildren from "../PlantChildren";
 
 interface IForm {
   // plantname: string;
@@ -18,7 +18,15 @@ interface IForm {
   // plantfamilyid: number;
 }
 
-interface IPlantIdChild {
+export interface ILocalState {
+  picked_image: {
+    base64: string;
+    uri: string;
+  };
+  plant_info: IPlantIdChild;
+}
+
+export interface IPlantIdChild {
   plantname: string;
   plantnickname?: string;
   plantdetails?: string;
@@ -28,27 +36,35 @@ interface IPlantIdChild {
   isUpdated: boolean;
 }
 
-const initialState = {
-  plantname: "",
-  plantnickname: "",
-  plantdetails: "",
-  scientificname: "",
-  plantgenus: "",
-  plantspecies: "",
-  isUpdated: false,
+const local_state = {
+  picked_image: {
+    base64: "",
+    uri: "",
+  },
+  plant_info: {
+    isUpdated: false,
+    plantdetails: "",
+    plantgenus: "",
+    plantname: "",
+    plantnickname: "",
+    plantspecies: "",
+    scientificname: "",
+  },
 };
 
 export default function ChildForm() {
+  // ---------- Start of Variable declaration ----------
   const formMethods = useForm();
   const navigation = useNavigation();
 
-  const [image, setImage] = React.useState<string>("");
-  const [base64, setBase64] = React.useState<string>("");
-  const [plantIdChild, setPlantIdChild] =
-    React.useState<IPlantIdChild>(initialState);
+  const [localState, setLocalState] = useState<ILocalState>(local_state);
+
+  const isURI = Boolean(localState.picked_image.uri);
+  const isBase64 = Boolean(localState.picked_image.base64);
 
   const [addPlantChild, { loading, error: mutationError }] =
     useMutation(ADD_PLANT_CHILD);
+
   const isMutationError = Boolean(mutationError);
   const isMutationLoading = Boolean(loading);
 
@@ -58,7 +74,9 @@ export default function ChildForm() {
       plantfamily: { plantfamilyid },
     },
   } = useProudPlantParent();
+  // ---------- End of Variable declaration ----------
 
+  // ---------- Start of ImagePicker feature implementation ----------
   React.useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -81,23 +99,32 @@ export default function ChildForm() {
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);
-      result.base64 ? setBase64(result.base64) : setBase64("");
+      // setImage(result.uri);
+      // result.base64 ? setBase64(result.base64) : setBase64("");
+      const newPickedImage = {
+        ...localState,
+        picked_image: {
+          base64: result.uri,
+          uri: result.base64 || "",
+        },
+      };
+      setLocalState(newPickedImage);
     }
   };
+  // ---------- End of ImagePicker feature implementation ----------
 
+  // ---------- Start of Form Actions ----------
   const onSubmit = (form: IForm) => {
     console.log("What is the plant family id:", plantfamilyid);
 
     const handleMutation = async (form: IForm) => {
       const { data } = await addPlantChild({
         variables: {
-          // plantname: form.plantname,
           plantnickname: form.plantnickname,
-          plantname: plantIdChild.plantname,
-          plantgenus: plantIdChild.plantgenus,
-          scientificname: plantIdChild.scientificname,
-          plantspecies: plantIdChild.plantspecies,
+          plantname: localState.plant_info.plantname,
+          plantgenus: localState.plant_info.plantgenus,
+          scientificname: localState.plant_info.scientificname,
+          plantspecies: localState.plant_info.plantspecies,
           plantfamilyid: plantfamilyid,
         },
       });
@@ -120,24 +147,24 @@ export default function ChildForm() {
   const onErrors = (errors: {}) => {
     console.warn(errors);
   };
+  // ---------- End of Form Actions ----------
 
   return (
     <View>
+      <Button title="Pick an image from camera roll" onPress={pickImage} />
+
+      {Boolean(isURI) && Boolean(isBase64) && (
+        <PlantId
+          // image={image}
+          // base64={base64}
+          // plantIdChild={plantIdChild}
+          // setPlantIdChild={setPlantIdChild}
+          localState={localState}
+          setLocalState={setLocalState}
+        />
+      )}
+
       <FormProvider {...formMethods}>
-        <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {Boolean(image) && Boolean(base64) && (
-          <View>
-            <PlantId
-              image={image}
-              base64={base64}
-              plantIdChild={plantIdChild}
-              setPlantIdChild={setPlantIdChild}
-            />
-            {plantIdChild !== initialState && (
-              <Text>{JSON.stringify(plantIdChild, null, 4)}</Text>
-            )}
-          </View>
-        )}
         <FormInput
           name="plantnickname"
           label="Plant Nick Name"
@@ -145,6 +172,7 @@ export default function ChildForm() {
           returnKeyType="next"
         />
       </FormProvider>
+
       {isMutationLoading ? (
         <ActivityIndicator size="large" color="#00ff00" />
       ) : (
@@ -153,6 +181,7 @@ export default function ChildForm() {
           onPress={formMethods.handleSubmit(onSubmit, onErrors)}
         />
       )}
+
       {isMutationError && <Text>{mutationError?.message}</Text>}
     </View>
   );

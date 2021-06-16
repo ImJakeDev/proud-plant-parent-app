@@ -5,62 +5,49 @@ import { ActivityIndicator, View, Text, Image, ScrollView } from "react-native";
 import usePlantId from "../hooks/usePlantId";
 import IPlantIdRes from "../Types/IPlantIdRes";
 
+import { ILocalState } from "./forms/ChildForm";
+
 interface IPlantId {
-  image: string | null;
-  base64: string;
-  setPlantIdChild: (arg0: IPlantIdChild) => void;
-  plantIdChild: IPlantIdChild;
+  localState: ILocalState;
+  setLocalState: (arg0: ILocalState) => void;
 }
-
-interface IPlantIdChild {
-  plantname: string;
-  plantnickname?: string;
-  plantdetails?: string;
-  scientificname?: string;
-  plantgenus?: string;
-  plantspecies?: string;
-  isUpdated: boolean;
-}
-
-// const initialState = {
-//   plantname: "",
-//   plantnickname: "",
-//   plantdetails: "",
-//   scientificname: "",
-//   plantgenus: "",
-//   plantspecies: "",
-// };
 
 export default function PlantId(props: IPlantId) {
-  // const [plantIdChild, setPlantIdChild] = useState<IPlantIdChild>(initialState);
-
-  const base64Image = props.base64.length > 0 ? props.base64 : null;
+  const base64Image =
+    props.localState.picked_image.base64.length > 0
+      ? props.localState.picked_image.base64
+      : null;
 
   const { data, isLoading, isError, error, status } = usePlantId(base64Image);
 
   useEffect(() => {
     const handleDataToState = (data: IPlantIdRes | undefined) => {
-      if (!data) return props.plantIdChild;
+      if (!data) return props.localState.plant_info;
 
-      const newPlantIdChildState: IPlantIdChild = {
-        plantname: data.suggestions[0].plant_name,
-        plantnickname: "",
-        plantdetails: "",
-        scientificname: data.suggestions[0].plant_details.scientific_name,
-        plantgenus: data.suggestions[0].plant_details.structured_name.genus,
-        plantspecies: data.suggestions[0].plant_details.structured_name.species,
-        isUpdated: true,
+      const newPlantInfoState: ILocalState = {
+        ...props.localState,
+        plant_info: {
+          plantname: data.suggestions[0].plant_name,
+          plantnickname: "",
+          plantdetails: "",
+          scientificname: data.suggestions[0].plant_details.scientific_name,
+          plantgenus: data.suggestions[0].plant_details.structured_name.genus,
+          plantspecies:
+            data.suggestions[0].plant_details.structured_name.species,
+          isUpdated: true,
+        },
       };
-      props.setPlantIdChild(newPlantIdChildState);
+
+      props.setLocalState(newPlantInfoState);
     };
     !isLoading && handleDataToState(data);
   }, [isLoading]);
 
   return (
     <View>
-      {props.image ? (
+      {props.localState.picked_image.uri ? (
         <Image
-          source={{ uri: props.image }}
+          source={{ uri: props.localState.picked_image.uri }}
           style={{ width: 200, height: 200 }}
         />
       ) : (
@@ -72,10 +59,7 @@ export default function PlantId(props: IPlantId) {
           <ActivityIndicator size="large" color="#55a630" />
         </View>
       ) : (
-        <View>
-          <Text>{status}</Text>
-          {/* <Text>{JSON.stringify(plantIdChild)}</Text> */}
-        </View>
+        <Text>{status}</Text>
       )}
       {isError && <Text>{error?.message}</Text>}
     </View>
