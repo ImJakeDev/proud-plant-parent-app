@@ -99,8 +99,6 @@ export default function ChildForm() {
     });
 
     if (!result.cancelled) {
-      // setImage(result.uri);
-      // result.base64 ? setBase64(result.base64) : setBase64("");
       const newPickedImage = {
         ...localState,
         picked_image: {
@@ -155,10 +153,6 @@ export default function ChildForm() {
 
       {Boolean(isURI) && Boolean(isBase64) && (
         <PlantId
-          // image={image}
-          // base64={base64}
-          // plantIdChild={plantIdChild}
-          // setPlantIdChild={setPlantIdChild}
           localState={localState}
           setLocalState={setLocalState}
         />
