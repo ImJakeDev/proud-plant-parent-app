@@ -17,24 +17,17 @@ export default function PlantChildren() {
   return (
     <View>
       <Text>Family name: {familyname}</Text>
-      {plantchildren?.length >= 1 ? (
-        <View>
-          <Button
-            title="Add a plant to the fam. +🪴"
-            onPress={() => navigation.navigate("AddPlantChildScreen")}
-          />
-          <FlatList
-            data={plantchildren}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <Text>{JSON.stringify(item, null, 4)}</Text>
-            )}
-          />
-        </View>
-      ) : (
-        <Button
-          title="Add a plant to the fam. +🪴"
-          onPress={() => navigation.navigate("AddPlantChildScreen")}
+      <Button
+        title="Add a plant to the fam. +🪴"
+        onPress={() => navigation.navigate("AddPlantChildScreen")}
+      />
+      {plantchildren?.length >= 1 && (
+        <FlatList
+          data={plantchildren}
+          keyExtractor={(index) => index.toString()}
+          renderItem={({ item }) => (
+            <Text>{JSON.stringify(item, null, 4)}</Text>
+          )}
         />
       )}
     </View>
