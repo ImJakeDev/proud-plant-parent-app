@@ -16,7 +16,7 @@
     "plantname",
     "plantparent",
     "plantparentid",
-    "plantpchildren",
+    "plantchildren",
     "plantpchildid",
     "plantspecies",
     "scientificname",

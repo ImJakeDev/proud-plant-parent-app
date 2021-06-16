@@ -10,7 +10,7 @@ export function proudPlantParentReducer(state: InitState, action: Actions) {
     case ActionType.ADD_PLANT_CHILD:
       return {
         ...state,
-        plantpchildren: [{ ...action.payload }],
+        plantchildren: [...state.plantchildren, { ...action.payload }],
       };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

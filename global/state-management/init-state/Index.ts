@@ -1,7 +1,7 @@
 export interface InitState {
   plantparent: IPlantParent;
   plantfamily: IPlantFamily;
-  plantpchildren: IPlantChild[];
+  plantchildren: IPlantChild[];
 }
 
 export interface IPlantParent {
@@ -52,5 +52,5 @@ export const initialState: InitState = {
     becamefamily: "",
     plantparentid: null,
   },
-  plantpchildren: [],
+  plantchildren: [],
 };

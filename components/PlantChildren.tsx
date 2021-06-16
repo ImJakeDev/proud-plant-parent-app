@@ -10,22 +10,27 @@ export default function PlantChildren() {
   const {
     state: {
       plantfamily: { familyname },
-      plantpchildren,
+      plantchildren,
     },
   } = useProudPlantParent();
 
   return (
     <View>
       <Text>Family name: {familyname}</Text>
-      {plantpchildren?.length > 0 ? (
-        <FlatList
-          data={plantpchildren}
-          keyExtractor={(item) => item.plantpchildid.toString()}
-          renderItem={({ item, index }) => (
-            <Text>{JSON.stringify(item, null, 4)}</Text>
-          )}
-        />
-        // <Text>{JSON.stringify(plantpchildren, null, 4)}</Text>
+      {plantchildren?.length >= 1 ? (
+        <View>
+          <Button
+            title="Add a plant to the fam. +🪴"
+            onPress={() => navigation.navigate("AddPlantChildScreen")}
+          />
+          <FlatList
+            data={plantchildren}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <Text>{JSON.stringify(item, null, 4)}</Text>
+            )}
+          />
+        </View>
       ) : (
         <Button
           title="Add a plant to the fam. +🪴"
