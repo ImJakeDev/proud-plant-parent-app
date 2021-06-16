@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 
 import { ActionType } from "../../global/state-management/actions/Index";
-import { useProudPlantParent } from "../../global/proudPlantParentContext";
+import { useProudPlantParent } from "../../global/state-management/context/index";
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 import PlantId from "../PlantId";

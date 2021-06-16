@@ -6,7 +6,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { PROUD_PLANT_PARENT_ENDPOINT, X_HASURA_ADMIN_SECRET } from "@env";
 
-import { ProudPlantParentProvider } from "./global/proudPlantParentContext";
+import { ProudPlantParentProvider } from "./global/state-management/context/index";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";

@@ -5,7 +5,7 @@ import { gql, useMutation } from "@apollo/client";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 
 import { ActionType } from "../../global/state-management/actions/Index";
-import { useProudPlantParent } from "../../global/proudPlantParentContext";
+import { useProudPlantParent } from "../../global/state-management/context/index";
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 

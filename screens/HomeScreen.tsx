@@ -2,7 +2,7 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { useProudPlantParent } from "../global/proudPlantParentContext";
+import { useProudPlantParent } from "../global/state-management/context/index";
 import Button from "../components/Button";
 import PlantChildren from "../components/PlantChildren";
 import { Text, View } from "../components/Themed";

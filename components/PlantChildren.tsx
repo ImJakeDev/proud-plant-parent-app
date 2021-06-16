@@ -2,7 +2,7 @@ import * as React from "react";
 import { StyleSheet, View, Text, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { useProudPlantParent } from "../global/proudPlantParentContext";
+import { useProudPlantParent } from "../global/state-management/context/index";
 import Button from "../components/Button";
 
 export default function PlantChildren() {
