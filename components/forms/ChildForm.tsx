@@ -159,9 +159,23 @@ export default function ChildForm() {
 }
 
 const ADD_PLANT_CHILD = gql`
-  mutation ($plantname: String!, $plantfamilyid: Int!, $plantgenus: String, $scientificname: String, $plantspecies: String) {
+  mutation (
+    $plantname: String!
+    $plantfamilyid: Int!
+    $plantgenus: String
+    $scientificname: String
+    $plantspecies: String
+    $plantnickname: String
+  ) {
     insert_plantchild(
-      objects: { plantname: $plantname, plantfamilyid: $plantfamilyid, plantgenus: $plantgenus, scientificname: $scientificname, plantspecies: $plantspecies }
+      objects: {
+        plantname: $plantname
+        plantfamilyid: $plantfamilyid
+        plantgenus: $plantgenus
+        scientificname: $scientificname
+        plantspecies: $plantspecies
+        plantnickname: $plantnickname
+      }
     ) {
       returning {
         age

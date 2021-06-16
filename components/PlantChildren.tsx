@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { useProudPlantParent } from "../global/proudPlantParentContext";
@@ -14,14 +14,18 @@ export default function PlantChildren() {
     },
   } = useProudPlantParent();
 
-  // const isPlantProfile = Boolean(plantpchildren);
-  // console.log(isPlantProfile);
-
   return (
     <View>
       <Text>Family name: {familyname}</Text>
       {plantpchildren?.length > 0 ? (
-        <Text>{JSON.stringify(plantpchildren)}</Text>
+        <FlatList
+          data={plantpchildren}
+          keyExtractor={(item) => item.plantpchildid.toString()}
+          renderItem={({ item, index }) => (
+            <Text>{JSON.stringify(item, null, 4)}</Text>
+          )}
+        />
+        // <Text>{JSON.stringify(plantpchildren, null, 4)}</Text>
       ) : (
         <Button
           title="Add a plant to the fam. +🪴"

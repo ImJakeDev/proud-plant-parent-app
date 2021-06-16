@@ -23,7 +23,7 @@ export interface IPlantFamily {
 
 export interface IPlantChild {
   __typename: string;
-  plantpchildid: number | null;
+  plantpchildid: number;
   plantname: string;
   plantnickname?: string;
   plantdetails?: string;
