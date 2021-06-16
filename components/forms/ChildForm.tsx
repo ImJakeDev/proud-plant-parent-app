@@ -11,6 +11,7 @@ import { useProudPlantParent } from "../../global/state-management/context/index
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 import PlantId from "../PlantId";
+import Camera from '../Camera'
 
 interface IForm {
   plantnickname?: string;
@@ -54,6 +55,8 @@ export default function ChildForm() {
   // ---------- Start of Variable declaration ----------
   const formMethods = useForm();
   const navigation = useNavigation();
+
+  const [isCameraReady, setIsCameraReady] = useState(false)
 
   const [localState, setLocalState] = useState<ILocalState>(local_state);
 
@@ -149,6 +152,12 @@ export default function ChildForm() {
   return (
     <View>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
+
+      {/* <Button title="Take a picture of a plant" onPress={() => navigation.navigate("CameraScreen")} /> */}
+
+      <Button title="Take a picture of a plant" onPress={() => setIsCameraReady(true)} />
+
+      {isCameraReady && <Camera/>}
 
       {isURI && (
         <Image source={{ uri: localState.picked_image.uri }} style={{ width: 200, height: 200 }} />

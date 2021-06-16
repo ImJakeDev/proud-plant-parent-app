@@ -14,6 +14,7 @@ import HomeScreen from "../screens/HomeScreen";
 import PlantParentScreen from "../screens/PlantParentScreen";
 import StartPlantFamilyScreen from "../screens/StartPlantFamilyScreen";
 import AddPlantChildScreen from "../screens/AddPlantChildScreen";
+import CameraScreen from "../screens/CameraScreen";
 
 type BottomTabParamList = {
   Home: undefined;
@@ -65,6 +66,7 @@ type TabOneParamList = {
   HomeScreen: undefined;
   StartPlantFamilyScreen: undefined;
   AddPlantChildScreen: undefined;
+  CameraScreen: undefined;
 };
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -87,6 +89,11 @@ function HomeNavigator() {
       <HomeStack.Screen
         name="AddPlantChildScreen"
         component={AddPlantChildScreen}
+        options={{ headerTitle: "Add a Plant" }}
+      />
+      <HomeStack.Screen
+        name="CameraScreen"
+        component={CameraScreen}
         options={{ headerTitle: "Add a Plant" }}
       />
     </HomeStack.Navigator>
