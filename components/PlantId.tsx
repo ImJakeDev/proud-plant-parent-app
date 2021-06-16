@@ -8,6 +8,8 @@ import IPlantIdRes from "../Types/IPlantIdRes";
 interface IPlantId {
   image: string | null;
   base64: string;
+  setPlantIdChild: (arg0:IPlantIdChild)=>void;
+  plantIdChild: IPlantIdChild;
 }
 
 interface IPlantIdChild {
@@ -19,17 +21,17 @@ interface IPlantIdChild {
   plantspecies?: string;
 }
 
-const initialState = {
-  plantname: "",
-  plantnickname: "",
-  plantdetails: "",
-  scientificname: "",
-  plantgenus: "",
-  plantspecies: "",
-};
+// const initialState = {
+//   plantname: "",
+//   plantnickname: "",
+//   plantdetails: "",
+//   scientificname: "",
+//   plantgenus: "",
+//   plantspecies: "",
+// };
 
 export default function PlantId(props: IPlantId) {
-  const [plantIdChild, setPlantIdChild] = useState<IPlantIdChild>(initialState);
+  // const [plantIdChild, setPlantIdChild] = useState<IPlantIdChild>(initialState);
 
   const base64Image = props.base64.length > 0 ? props.base64 : null;
 
@@ -37,17 +39,17 @@ export default function PlantId(props: IPlantId) {
 
   useEffect(() => {
     const handleDataToState = (data: IPlantIdRes | undefined) => {
-      if (!data) return plantIdChild;
+      if (!data) return props.plantIdChild;
 
       const newPlantIdChildState: IPlantIdChild = {
-        plantname: data.suggestions[0].plant_name || "",
+        plantname: data.suggestions[0].plant_name,
         plantnickname: "",
         plantdetails: "",
         scientificname: data.suggestions[0].plant_details.scientific_name,
         plantgenus: data.suggestions[0].plant_details.structured_name.genus,
         plantspecies: data.suggestions[0].plant_details.structured_name.species,
       };
-      setPlantIdChild(newPlantIdChildState);
+      props.setPlantIdChild(newPlantIdChildState);
     };
     !isLoading && handleDataToState(data);
   }, [isLoading]);
@@ -70,7 +72,7 @@ export default function PlantId(props: IPlantId) {
       ) : (
         <View>
           <Text>{status}</Text>
-          <Text>{JSON.stringify(plantIdChild)}</Text>
+          {/* <Text>{JSON.stringify(plantIdChild)}</Text> */}
         </View>
       )}
       {isError && <Text>{error?.message}</Text>}

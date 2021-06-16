@@ -16,12 +16,31 @@ interface IForm {
   plantfamilyid: number;
 }
 
+interface IPlantIdChild {
+  plantname: string;
+  plantnickname?: string;
+  plantdetails?: string;
+  scientificname?: string;
+  plantgenus?: string;
+  plantspecies?: string;
+}
+
+const initialState = {
+  plantname: "",
+  plantnickname: "",
+  plantdetails: "",
+  scientificname: "",
+  plantgenus: "",
+  plantspecies: "",
+};
+
 export default function ChildForm() {
   const formMethods = useForm();
   const navigation = useNavigation();
 
   const [image, setImage] = React.useState<string>("");
   const [base64, setBase64] = React.useState<string>("");
+  const [plantIdChild, setPlantIdChild] = React.useState<IPlantIdChild>(initialState);
 
   const [addPlantChild, { loading, error: mutationError }] =
     useMutation(ADD_PLANT_CHILD);
@@ -97,7 +116,10 @@ export default function ChildForm() {
       <FormProvider {...formMethods}>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
         {Boolean(image) && Boolean(base64) && (
-          <PlantId image={image} base64={base64} />
+          <View>
+            <PlantId image={image} base64={base64} plantIdChild={plantIdChild} setPlantIdChild={setPlantIdChild} />
+            <Text>{JSON.stringify(plantIdChild)}</Text>
+          </View>
         )}
         <FormInput
           name="plantname"
