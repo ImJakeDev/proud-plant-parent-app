@@ -19,6 +19,7 @@ interface IPlantIdChild {
   scientificname?: string;
   plantgenus?: string;
   plantspecies?: string;
+  isUpdated: boolean;
 }
 
 // const initialState = {
@@ -48,6 +49,7 @@ export default function PlantId(props: IPlantId) {
         scientificname: data.suggestions[0].plant_details.scientific_name,
         plantgenus: data.suggestions[0].plant_details.structured_name.genus,
         plantspecies: data.suggestions[0].plant_details.structured_name.species,
+        isUpdated: true,
       };
       props.setPlantIdChild(newPlantIdChildState);
     };

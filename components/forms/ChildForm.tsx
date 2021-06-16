@@ -10,10 +10,12 @@ import { useProudPlantParent } from "../../global/proudPlantParentContext";
 import { FormInput } from "../react-hook-forms/FormInput";
 import Button from "../Button";
 import PlantId from "../PlantId";
+import PlantChildren from "../PlantChildren";
 
 interface IForm {
-  plantname: string;
-  plantfamilyid: number;
+  // plantname: string;
+  plantnickname?: string;
+  // plantfamilyid: number;
 }
 
 interface IPlantIdChild {
@@ -23,6 +25,7 @@ interface IPlantIdChild {
   scientificname?: string;
   plantgenus?: string;
   plantspecies?: string;
+  isUpdated: boolean;
 }
 
 const initialState = {
@@ -32,6 +35,7 @@ const initialState = {
   scientificname: "",
   plantgenus: "",
   plantspecies: "",
+  isUpdated: false,
 };
 
 export default function ChildForm() {
@@ -88,7 +92,12 @@ export default function ChildForm() {
     const handleMutation = async (form: IForm) => {
       const { data } = await addPlantChild({
         variables: {
-          plantname: form.plantname,
+          // plantname: form.plantname,
+          plantnickname: form.plantnickname,
+          plantname: plantIdChild.plantname,
+          plantgenus: plantIdChild.plantgenus,
+          scientificname: plantIdChild.scientificname,
+          plantspecies: plantIdChild.plantspecies,
           plantfamilyid: plantfamilyid,
         },
       });
@@ -125,14 +134,14 @@ export default function ChildForm() {
               setPlantIdChild={setPlantIdChild}
             />
             {plantIdChild !== initialState && (
-              <Text>{JSON.stringify(plantIdChild)}</Text>
+              <Text>{JSON.stringify(plantIdChild, null, 4)}</Text>
             )}
           </View>
         )}
         <FormInput
-          name="plantname"
-          label="Plant Name"
-          rules={{ required: "Plant Name is required!" }}
+          name="plantnickname"
+          label="Plant Nick Name"
+          // rules={{ required: "Plant Name is required!" }}
           returnKeyType="next"
         />
       </FormProvider>
@@ -150,9 +159,9 @@ export default function ChildForm() {
 }
 
 const ADD_PLANT_CHILD = gql`
-  mutation ($plantname: String!, $plantfamilyid: Int!) {
+  mutation ($plantname: String!, $plantfamilyid: Int!, $plantgenus: String, $scientificname: String, $plantspecies: String) {
     insert_plantchild(
-      objects: { plantname: $plantname, plantfamilyid: $plantfamilyid }
+      objects: { plantname: $plantname, plantfamilyid: $plantfamilyid, plantgenus: $plantgenus, scientificname: $scientificname, plantspecies: $plantspecies }
     ) {
       returning {
         age
