@@ -28,7 +28,7 @@ export default function HomeScreen() {
       />
       <View style={{ paddingBottom: 20 }}>
         <Text>My full name is: {firstname + " " + lastname}</Text>
-        {nickname && <Text>Call me: {nickname}</Text>}
+        {Boolean(nickname) && <Text>Call me: {nickname}</Text>}
         <Text>Became a parent at: {timeofparenthood}</Text>
       </View>
       {plantfamilyid === null ? (
