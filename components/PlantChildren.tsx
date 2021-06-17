@@ -1,9 +1,10 @@
 import * as React from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { useProudPlantParent } from "../global/state-management/context/index";
 import Button from "../components/Button";
+import PlantChild from "./PlantChild";
 
 export default function PlantChildren() {
   const navigation = useNavigation();
@@ -25,9 +26,7 @@ export default function PlantChildren() {
         <FlatList
           data={plantchildren}
           keyExtractor={(index) => index.toString()}
-          renderItem={({ item }) => (
-            <Text>{JSON.stringify(item, null, 4)}</Text>
-          )}
+          renderItem={({ item }) => <PlantChild plantChild={item} />}
         />
       )}
     </View>
