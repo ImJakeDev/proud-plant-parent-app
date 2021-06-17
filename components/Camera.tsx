@@ -3,8 +3,15 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 
 import Button from "./Button";
+import { ILocalState } from "./forms/ChildForm";
 
-export default function App() {
+interface ICameraFeature {
+  setIsCameraReady: (arg0: boolean) => void;
+  setLocalState: (arg0: ILocalState) => void;
+  localState: ILocalState;
+}
+
+export default function CameraFeature(props: ICameraFeature) {
   const [camera, setCamera] = useState<any | null>(null);
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -25,11 +32,23 @@ export default function App() {
 
   const takePicture = async () => {
     if (!camera) return;
+
     const photo = await camera.takePictureAsync({
       base64: true,
       quality: 1,
     });
-    console.log(photo);
+
+    console.log("Photo response", JSON.stringify(photo, null, 4));
+
+    const newCameraPhoto = {
+      ...props.localState,
+      camera_photo: {
+        base64: photo.base64,
+        uri: photo.uri,
+      },
+    };
+    props.setLocalState(newCameraPhoto);
+    props.setIsCameraReady(false);
   };
   return (
     <View style={styles.container}>

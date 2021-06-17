@@ -15,14 +15,17 @@ interface IPlantId {
 export default function PlantId(props: IPlantId) {
   const {
     localState: {
-      picked_image: { base64 },
+      picked_image: { base64: imageBase64 },
+      camera_photo: { base64: photoBase64 },
       plant_info,
     },
     localState,
     setLocalState,
   } = props;
 
-  const { data, isLoading, isError, isSuccess, error } = usePlantId(base64);
+  const { data, isLoading, isError, isSuccess, error } = usePlantId(
+    imageBase64 || photoBase64
+  );
 
   useEffect(() => {
     const handleDataToState = (data: IPlantIdRes | undefined) => {

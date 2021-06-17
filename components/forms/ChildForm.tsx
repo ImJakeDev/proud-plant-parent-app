@@ -22,6 +22,10 @@ export interface ILocalState {
     base64: string;
     uri: string;
   };
+  camera_photo: {
+    base64: string;
+    uri: string;
+  };
   plant_info: IPlantIdChild;
 }
 
@@ -37,6 +41,10 @@ export interface IPlantIdChild {
 
 const local_state = {
   picked_image: {
+    base64: "",
+    uri: "",
+  },
+  camera_photo: {
     base64: "",
     uri: "",
   },
@@ -60,8 +68,11 @@ export default function ChildForm() {
 
   const [localState, setLocalState] = useState<ILocalState>(local_state);
 
-  const isURI = Boolean(localState.picked_image.uri);
-  const isBase64 = Boolean(localState.picked_image.base64);
+  const isCameraURI = Boolean(localState.camera_photo.uri);
+  const isCameraBase64 = Boolean(localState.camera_photo.base64);
+
+  const isImageURI = Boolean(localState.picked_image.uri);
+  const isImageBase64 = Boolean(localState.picked_image.base64);
 
   const [addPlantChild, { loading, error: mutationError }] =
     useMutation(ADD_PLANT_CHILD);
@@ -152,7 +163,11 @@ export default function ChildForm() {
   return (
     <View style={{ width: "100%", height: "100%" }}>
       {isCameraReady ? (
-        <Camera />
+        <Camera
+          setIsCameraReady={setIsCameraReady}
+          localState={localState}
+          setLocalState={setLocalState}
+        />
       ) : (
         <View style={{ paddingLeft: 10, paddingRight: 10 }}>
           <Button title="Pick an image from camera roll" onPress={pickImage} />
@@ -162,14 +177,25 @@ export default function ChildForm() {
             onPress={() => setIsCameraReady(true)}
           />
 
-          {isURI && (
+          {isImageURI && (
             <Image
               source={{ uri: localState.picked_image.uri }}
               style={{ width: 200, height: 200 }}
             />
           )}
 
-          {isBase64 && (
+          {isCameraURI && (
+            <Image
+              source={{ uri: localState.camera_photo.uri }}
+              style={{ width: 200, height: 200 }}
+            />
+          )}
+
+          {isImageBase64 && (
+            <PlantId localState={localState} setLocalState={setLocalState} />
+          )}
+
+          {isCameraBase64 && (
             <PlantId localState={localState} setLocalState={setLocalState} />
           )}
 
