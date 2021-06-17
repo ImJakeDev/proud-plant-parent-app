@@ -12,7 +12,7 @@ export default function HomeScreen() {
   const {
     state: {
       plantparent: { firstname, lastname, nickname, timeofparenthood },
-      plantfamily: { plantfamilyid, familyname },
+      plantfamily: { plantfamilyid },
     },
   } = useProudPlantParent();
 
@@ -28,7 +28,7 @@ export default function HomeScreen() {
       />
       <View style={{ paddingBottom: 20 }}>
         <Text>My full name is: {firstname + " " + lastname}</Text>
-        <Text>Call me: {nickname}</Text>
+        {nickname && <Text>Call me: {nickname}</Text>}
         <Text>Became a parent at: {timeofparenthood}</Text>
       </View>
       {plantfamilyid === null ? (
