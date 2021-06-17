@@ -6,7 +6,11 @@ import ChildForm from "../components/forms/ChildForm";
 export default function AddPlantChildScreen() {
   return (
     <View style={styles.container}>
+      {/* Buttons */}
+      {/* Camera */}
+      {/* Form */}
       <ChildForm />
+      {/* Submit */}
     </View>
   );
 }
@@ -16,7 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingLeft: 10,
-    paddingRight: 10,
+    width: "100%",
+    height: "100%",
   },
 });

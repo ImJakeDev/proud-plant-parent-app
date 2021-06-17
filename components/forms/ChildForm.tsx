@@ -150,45 +150,49 @@ export default function ChildForm() {
   // ---------- End of Form Actions ----------
 
   return (
-    <View>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-
-      <Button
-        title="Take a picture of a plant"
-        onPress={() => setIsCameraReady(true)}
-      />
-
-      {isCameraReady && <Camera />}
-
-      {isURI && (
-        <Image
-          source={{ uri: localState.picked_image.uri }}
-          style={{ width: 200, height: 200 }}
-        />
-      )}
-
-      {isBase64 && (
-        <PlantId localState={localState} setLocalState={setLocalState} />
-      )}
-
-      <FormProvider {...formMethods}>
-        <FormInput
-          name="plantnickname"
-          label="Plant Nick Name"
-          returnKeyType="next"
-        />
-      </FormProvider>
-
-      {isMutationLoading ? (
-        <ActivityIndicator size="large" color="#00ff00" />
+    <View style={{ width: "100%", height: "100%" }}>
+      {isCameraReady ? (
+        <Camera />
       ) : (
-        <Button
-          title="Submit"
-          onPress={formMethods.handleSubmit(onSubmit, onErrors)}
-        />
-      )}
+        <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+          <Button title="Pick an image from camera roll" onPress={pickImage} />
 
-      {isMutationError && <Text>{mutationError?.message}</Text>}
+          <Button
+            title="Take a picture of a plant"
+            onPress={() => setIsCameraReady(true)}
+          />
+
+          {isURI && (
+            <Image
+              source={{ uri: localState.picked_image.uri }}
+              style={{ width: 200, height: 200 }}
+            />
+          )}
+
+          {isBase64 && (
+            <PlantId localState={localState} setLocalState={setLocalState} />
+          )}
+
+          <FormProvider {...formMethods}>
+            <FormInput
+              name="plantnickname"
+              label="Plant Nick Name"
+              returnKeyType="next"
+            />
+          </FormProvider>
+
+          {isMutationLoading ? (
+            <ActivityIndicator size="large" color="#00ff00" />
+          ) : (
+            <Button
+              title="Submit"
+              onPress={formMethods.handleSubmit(onSubmit, onErrors)}
+            />
+          )}
+
+          {isMutationError && <Text>{mutationError?.message}</Text>}
+        </View>
+      )}
     </View>
   );
 }
