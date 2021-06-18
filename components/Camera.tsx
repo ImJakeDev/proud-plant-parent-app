@@ -1,9 +1,9 @@
-import React, { useState, useEffect, ReactNode } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { Camera } from "expo-camera";
 
 import Button from "./Button";
-import { ILocalState } from "./forms/ChildForm";
+import { ILocalState } from "./AddPlantChild";
 
 interface ICameraFeature {
   setIsCameraReady: (arg0: boolean) => void;
@@ -54,7 +54,7 @@ export default function CameraFeature(props: ICameraFeature) {
     <View style={styles.container}>
       <Camera style={styles.camera} type={type} ref={(ref) => setCamera(ref)}>
         <View style={styles.buttonContainer}>
-          <View style={{alignSelf: "flex-end"}}>
+          <View style={{ alignSelf: "flex-end" }}>
             <Button title="Take Picture" onPress={takePicture} />
           </View>
         </View>

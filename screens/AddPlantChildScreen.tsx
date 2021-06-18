@@ -1,16 +1,12 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
 
-import ChildForm from "../components/forms/ChildForm";
+import AddPlantChild from "../components/AddPlantChild";
 
 export default function AddPlantChildScreen() {
   return (
     <View style={styles.container}>
-      {/* Buttons */}
-      {/* Camera */}
-      {/* Form */}
-      <ChildForm />
-      {/* Submit */}
+      <AddPlantChild />
     </View>
   );
 }

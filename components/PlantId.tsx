@@ -5,7 +5,7 @@ import { ActivityIndicator, View, Text, Image } from "react-native";
 import usePlantId from "../hooks/usePlantId";
 import IPlantIdRes from "../Types/IPlantIdRes";
 
-import { ILocalState } from "./forms/ChildForm";
+import { ILocalState } from "./AddPlantChild";
 
 interface IPlantId {
   localState: ILocalState;
@@ -40,7 +40,8 @@ export default function PlantId(props: IPlantId) {
           plantgenus: data.suggestions[0].plant_details.structured_name.genus,
           plantname: data.suggestions[0].plant_name,
           plantnickname: "",
-          plantspecies: data.suggestions[0].plant_details.structured_name.species,
+          plantspecies:
+            data.suggestions[0].plant_details.structured_name.species,
           scientificname: data.suggestions[0].plant_details.scientific_name,
         },
       };

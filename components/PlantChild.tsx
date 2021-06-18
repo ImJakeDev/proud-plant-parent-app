@@ -9,7 +9,13 @@ interface IPlantChildProps {
 
 export default function PlantChild(props: IPlantChildProps) {
   const {
-    plantChild: { plantname, plantgenus, plantnickname, plantspecies, commonnames },
+    plantChild: {
+      plantname,
+      plantgenus,
+      plantnickname,
+      plantspecies,
+      commonnames,
+    },
   } = props;
   const isPlantNickName = Boolean(plantnickname);
   const isPlantGenus = Boolean(plantgenus);
