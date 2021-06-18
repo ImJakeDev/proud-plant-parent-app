@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, FlatList } from "react-native";
+import { SafeAreaView, View, Text, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { useProudPlantParent } from "../global/state-management/context/index";
@@ -16,7 +16,7 @@ export default function PlantChildren() {
   } = useProudPlantParent();
 
   return (
-    <View>
+    <SafeAreaView>
       <Text>Family name: {familyname}</Text>
       <Button
         title="Add a plant to the fam. +🪴"
@@ -29,6 +29,6 @@ export default function PlantChildren() {
           renderItem={({ item }) => <PlantChild plantChild={item} />}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 }
