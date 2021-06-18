@@ -54,7 +54,10 @@ export default function CameraFeature(props: ICameraFeature) {
     <View style={styles.container}>
       <Camera style={styles.camera} type={type} ref={(ref) => setCamera(ref)}>
         <View style={styles.buttonContainer}>
-          <View style={{ alignSelf: "flex-end" }}>
+          <View style={{width: "100%", paddingHorizontal: 120, paddingTop: 15 }}>
+            <Button title="Cancel" onPress={()=>props.setIsCameraReady(false)} />
+          </View>
+          <View style={{width: "100%", paddingHorizontal: 120 }}>
             <Button title="Take Picture" onPress={takePicture} />
           </View>
         </View>
@@ -73,13 +76,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     backgroundColor: "transparent",
-    flexDirection: "row",
-    marginTop: 20,
-    justifyContent: "center",
-    alignContent: "flex-start",
-  },
-  text: {
-    fontSize: 18,
-    color: "white",
+    justifyContent: "space-between",
+    alignContent: "center",
   },
 });
