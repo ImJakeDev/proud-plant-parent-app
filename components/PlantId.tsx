@@ -34,7 +34,7 @@ export default function PlantId(props: IPlantId) {
       const newPlantInfoState: ILocalState = {
         ...localState,
         plant_info: {
-          commonnames: data.suggestions[0].plant_details.common_names[0],
+          commonnames: data.suggestions[0].plant_details.common_names[0] || "",
           isUpdated: true,
           plantdetails: "",
           plantgenus: data.suggestions[0].plant_details.structured_name.genus,
