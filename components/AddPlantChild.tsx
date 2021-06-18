@@ -107,37 +107,45 @@ export default function AddPlantChild() {
           setLocalState={setLocalState}
         />
       ) : (
-        <View style={{ paddingLeft: 10, paddingRight: 10 }}>
-          <Button title="Pick an image from camera roll" onPress={pickImage} />
+        <View style={{ paddingLeft: 10, paddingRight: 10, alignContent: "center" }}>
+          <View style={{paddingHorizontal: 40, paddingTop: 20, alignSelf: "center"}}>
+            <Button title="Pick an image from camera roll" onPress={pickImage} />
 
-          <Button
-            title="Take a picture of a plant"
-            onPress={() => setIsCameraReady(true)}
-          />
-
-          {isImageURI && (
-            <Image
-              source={{ uri: localState.picked_image.uri }}
-              style={{ width: 200, height: 200 }}
+            <Button
+              title="Take a picture of a plant"
+              onPress={() => setIsCameraReady(true)}
             />
-          )}
+          </View>
 
-          {isCameraURI && (
-            <Image
-              source={{ uri: localState.camera_photo.uri }}
-              style={{ width: 200, height: 200 }}
-            />
-          )}
+          <View style={{paddingHorizontal: 40, paddingBottom: 20, alignSelf: "center"}}>
+            {isImageURI && (
+              <Image
+                source={{ uri: localState.picked_image.uri }}
+                style={{ width: 200, height: 200 }}
+              />
+            )}
 
-          {isImageBase64 && (
-            <PlantId localState={localState} setLocalState={setLocalState} />
-          )}
+            {isCameraURI && (
+              <Image
+                source={{ uri: localState.camera_photo.uri }}
+                style={{ width: 200, height: 200 }}
+              />
+            )}
+          </View>
+          
+          <View style={{paddingHorizontal: 40, paddingBottom: 20, alignSelf: "center"}}>
+            {isImageBase64 && (
+              <PlantId localState={localState} setLocalState={setLocalState} />
+            )}
 
-          {isCameraBase64 && (
-            <PlantId localState={localState} setLocalState={setLocalState} />
-          )}
-
-          {isPlantInfoUpdated && <ChildForm localState={localState} />}
+            {isCameraBase64 && (
+              <PlantId localState={localState} setLocalState={setLocalState} />
+            )}
+          </View>
+          
+          <View style={{paddingHorizontal: 40, paddingBottom: 20, alignSelf: "center"}}>
+            {isPlantInfoUpdated && <ChildForm localState={localState} />}
+          </View>
         </View>
       )}
     </View>

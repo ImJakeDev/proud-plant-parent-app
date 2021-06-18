@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { ActivityIndicator, View, Text, Image } from "react-native";
+import { ActivityIndicator, View, Text } from "react-native";
 
 import usePlantId from "../hooks/usePlantId";
 import IPlantIdRes from "../Types/IPlantIdRes";
