@@ -107,9 +107,20 @@ export default function AddPlantChild() {
           setLocalState={setLocalState}
         />
       ) : (
-        <View style={{ paddingLeft: 10, paddingRight: 10, alignContent: "center" }}>
-          <View style={{paddingHorizontal: 40, paddingTop: 20, alignSelf: "center"}}>
-            <Button title="Pick an image from camera roll" onPress={pickImage} />
+        <View
+          style={{ paddingLeft: 10, paddingRight: 10, alignContent: "center" }}
+        >
+          <View
+            style={{
+              paddingHorizontal: 40,
+              paddingTop: 20,
+              alignSelf: "center",
+            }}
+          >
+            <Button
+              title="Pick an image from camera roll"
+              onPress={pickImage}
+            />
 
             <Button
               title="Take a picture of a plant"
@@ -117,7 +128,13 @@ export default function AddPlantChild() {
             />
           </View>
 
-          <View style={{paddingHorizontal: 40, paddingBottom: 20, alignSelf: "center"}}>
+          <View
+            style={{
+              paddingHorizontal: 40,
+              paddingBottom: 20,
+              alignSelf: "center",
+            }}
+          >
             {isImageURI && (
               <Image
                 source={{ uri: localState.picked_image.uri }}
@@ -132,8 +149,14 @@ export default function AddPlantChild() {
               />
             )}
           </View>
-          
-          <View style={{paddingHorizontal: 40, paddingBottom: 20, alignSelf: "center"}}>
+
+          <View
+            style={{
+              paddingHorizontal: 40,
+              paddingBottom: 20,
+              alignSelf: "center",
+            }}
+          >
             {isImageBase64 && (
               <PlantId localState={localState} setLocalState={setLocalState} />
             )}
@@ -142,8 +165,14 @@ export default function AddPlantChild() {
               <PlantId localState={localState} setLocalState={setLocalState} />
             )}
           </View>
-          
-          <View style={{paddingHorizontal: 40, paddingBottom: 20, alignSelf: "center"}}>
+
+          <View
+            style={{
+              paddingHorizontal: 40,
+              paddingBottom: 20,
+              alignSelf: "center",
+            }}
+          >
             {isPlantInfoUpdated && <ChildForm localState={localState} />}
           </View>
         </View>

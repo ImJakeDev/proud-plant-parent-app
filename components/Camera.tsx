@@ -54,10 +54,15 @@ export default function CameraFeature(props: ICameraFeature) {
     <View style={styles.container}>
       <Camera style={styles.camera} type={type} ref={(ref) => setCamera(ref)}>
         <View style={styles.buttonContainer}>
-          <View style={{width: "100%", paddingHorizontal: 120, paddingTop: 15 }}>
-            <Button title="Cancel" onPress={()=>props.setIsCameraReady(false)} />
+          <View
+            style={{ width: "100%", paddingHorizontal: 120, paddingTop: 15 }}
+          >
+            <Button
+              title="Cancel"
+              onPress={() => props.setIsCameraReady(false)}
+            />
           </View>
-          <View style={{width: "100%", paddingHorizontal: 120 }}>
+          <View style={{ width: "100%", paddingHorizontal: 120 }}>
             <Button title="Take Picture" onPress={takePicture} />
           </View>
         </View>

@@ -16,7 +16,7 @@ export default function PlantChildren() {
   } = useProudPlantParent();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ marginBottom: 20 }}>
       <Text>Family name: {familyname}</Text>
       <Button
         title="Add a plant to the fam. +🪴"
