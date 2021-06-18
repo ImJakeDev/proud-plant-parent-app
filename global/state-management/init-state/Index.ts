@@ -34,6 +34,7 @@ export interface IPlantChild {
   joinedfamilyat: string;
   age?: string;
   plantfamilyid: number | null;
+  commonnames?: string;
 }
 
 export const initialState: InitState = {

@@ -37,6 +37,7 @@ export interface IPlantIdChild {
   plantgenus?: string;
   plantspecies?: string;
   isUpdated: boolean;
+  commonnames: string;
 }
 
 const local_state = {
@@ -56,6 +57,7 @@ const local_state = {
     plantnickname: "",
     plantspecies: "",
     scientificname: "",
+    commonnames: "",
   },
 };
 
@@ -136,6 +138,7 @@ export default function ChildForm() {
           scientificname: localState.plant_info.scientificname,
           plantspecies: localState.plant_info.plantspecies,
           plantfamilyid: plantfamilyid,
+          commonnames: localState.plant_info.commonnames,
         },
       });
 
@@ -225,33 +228,36 @@ export default function ChildForm() {
 
 const ADD_PLANT_CHILD = gql`
   mutation (
-    $plantname: String!
+    $commonnames: String
     $plantfamilyid: Int!
     $plantgenus: String
-    $scientificname: String
-    $plantspecies: String
+    $plantname: String!
     $plantnickname: String
+    $plantspecies: String
+    $scientificname: String
   ) {
     insert_plantchild(
       objects: {
-        plantname: $plantname
+        commonnames: $commonnames
         plantfamilyid: $plantfamilyid
         plantgenus: $plantgenus
-        scientificname: $scientificname
-        plantspecies: $plantspecies
+        plantname: $plantname
         plantnickname: $plantnickname
+        plantspecies: $plantspecies
+        scientificname: $scientificname
       }
     ) {
       returning {
         age
+        commonnames
         dateofbirth
         joinedfamilyat
+        plantchildid
         plantdetails
         plantfamilyid
         plantgenus
         plantname
         plantnickname
-        plantchildid
         plantspecies
         scientificname
       }

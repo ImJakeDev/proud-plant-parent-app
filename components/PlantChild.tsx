@@ -9,11 +9,12 @@ interface IPlantChildProps {
 
 export default function PlantChild(props: IPlantChildProps) {
   const {
-    plantChild: { plantname, plantgenus, plantnickname, plantspecies },
+    plantChild: { plantname, plantgenus, plantnickname, plantspecies, commonnames },
   } = props;
   const isPlantNickName = Boolean(plantnickname);
   const isPlantGenus = Boolean(plantgenus);
   const isPlantSpecies = Boolean(plantspecies);
+  const isCommonName = Boolean(commonnames);
 
   return (
     <View style={{ marginBottom: 10 }}>
@@ -21,6 +22,7 @@ export default function PlantChild(props: IPlantChildProps) {
       {isPlantNickName && <Text>Plant Nick Name: {plantnickname}</Text>}
       {isPlantSpecies && <Text>Plant Species: {plantspecies}</Text>}
       {isPlantGenus && <Text>Plant Genus: {plantgenus}</Text>}
+      {isCommonName && <Text>Common Name: {commonnames}</Text>}
     </View>
   );
 }

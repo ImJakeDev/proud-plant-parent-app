@@ -5,6 +5,10 @@
     "name": "proud-plant-parent-app",
     "slug": "proud-plant-parent-app",
     "version": "1.0.0",
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "description": "",
+    "githubUrl": "https://github.com/ImJakeDev/proud-plant-parent-app"
   }
 }
