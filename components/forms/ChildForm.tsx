@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { ActivityIndicator, View, Text } from "react-native";
+import { ActivityIndicator, View, Text, KeyboardAvoidingView } from "react-native";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 
@@ -73,7 +73,7 @@ export default function ChildForm(props: IChildForm) {
   };
 
   return (
-    <View style={{ width: "100%", height: "100%" }}>
+    <KeyboardAvoidingView style={{ width: "100%", height: "100%" }}>
       <FormProvider {...formMethods}>
         <FormInput
           name="plantnickname"
@@ -92,7 +92,7 @@ export default function ChildForm(props: IChildForm) {
       )}
 
       {isMutationError && <Text>{mutationError?.message}</Text>}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
