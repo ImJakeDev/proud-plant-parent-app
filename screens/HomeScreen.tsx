@@ -11,7 +11,6 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const {
     state: {
-      plantparent: { firstname, lastname, nickname, timeofparenthood },
       plantfamily: { plantfamilyid },
     },
   } = useProudPlantParent();
@@ -26,11 +25,6 @@ export default function HomeScreen() {
         lightColor="#e1e1e1"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <View style={{ paddingBottom: 20 }}>
-        <Text>My full name is: {firstname + " " + lastname}</Text>
-        {Boolean(nickname) && <Text>Call me: {nickname}</Text>}
-        <Text>Became a parent at: {timeofparenthood}</Text>
-      </View>
       {plantfamilyid === null ? (
         <Button
           title="Start a plant family! 🌱"
@@ -47,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     paddingLeft: 10,
     paddingRight: 10,
   },
@@ -55,9 +49,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
+    paddingTop: 10,
   },
   separator: {
-    marginVertical: 30,
+    marginVertical: 20,
     height: 2,
     width: "80%",
   },
