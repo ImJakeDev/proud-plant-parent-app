@@ -9,6 +9,7 @@ interface ICameraFeature {
   setIsCameraReady: (arg0: boolean) => void;
   setLocalState: (arg0: ILocalState) => void;
   localState: ILocalState;
+  setIsPickImage: (arg0: boolean) => void;
 }
 
 export default function CameraFeature(props: ICameraFeature) {
@@ -59,7 +60,7 @@ export default function CameraFeature(props: ICameraFeature) {
           >
             <Button
               title="Cancel"
-              onPress={() => props.setIsCameraReady(false)}
+              onPress={() => {props.setIsCameraReady(false); props.setIsPickImage(true)}}
             />
           </View>
           <View style={{ width: "100%", paddingHorizontal: 120 }}>

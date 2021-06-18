@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { View, Platform, Image } from "react-native";
+import { ScrollView, View, Platform, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
 import ChildForm from "./forms/ChildForm";
@@ -55,6 +55,9 @@ const local_state = {
 export default function AddPlantChild() {
   const [isCameraReady, setIsCameraReady] = useState(false);
 
+  const [isPickImage, setIsPickImage] = useState(true);
+  const [isTakePicture, setIsTakePicture] = useState(true);
+
   const [localState, setLocalState] = useState<ILocalState>(local_state);
 
   const isCameraURI = Boolean(localState.camera_photo.uri);
@@ -82,7 +85,7 @@ export default function AddPlantChild() {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       base64: true,
-      aspect: [4, 3],
+      aspect: [3, 4],
       quality: 1,
     });
 
@@ -95,6 +98,7 @@ export default function AddPlantChild() {
         },
       };
       setLocalState(newPickedImage);
+      setIsTakePicture(false)
     }
   };
 
@@ -105,9 +109,10 @@ export default function AddPlantChild() {
           localState={localState}
           setIsCameraReady={setIsCameraReady}
           setLocalState={setLocalState}
+          setIsPickImage={setIsPickImage}
         />
       ) : (
-        <View
+        <ScrollView
           style={{ paddingLeft: 10, paddingRight: 10, alignContent: "center" }}
         >
           <View
@@ -117,15 +122,15 @@ export default function AddPlantChild() {
               alignSelf: "center",
             }}
           >
-            <Button
-              title="Pick an image from camera roll"
+            {isPickImage && (<Button
+              title="Pick an image"
               onPress={pickImage}
-            />
+            />)}
 
-            <Button
-              title="Take a picture of a plant"
-              onPress={() => setIsCameraReady(true)}
-            />
+            {isTakePicture && (<Button
+              title="Take a picture"
+              onPress={() => {setIsCameraReady(true); setIsPickImage(false);}}
+            />)}
           </View>
 
           <View
@@ -138,14 +143,14 @@ export default function AddPlantChild() {
             {isImageURI && (
               <Image
                 source={{ uri: localState.picked_image.uri }}
-                style={{ width: 200, height: 200 }}
+                style={{ width: 300, height: 400 }}
               />
             )}
 
             {isCameraURI && (
               <Image
                 source={{ uri: localState.camera_photo.uri }}
-                style={{ width: 200, height: 200 }}
+                style={{ width: 300, height: 400 }}
               />
             )}
           </View>
@@ -175,7 +180,7 @@ export default function AddPlantChild() {
           >
             {isPlantInfoUpdated && <ChildForm localState={localState} />}
           </View>
-        </View>
+        </ScrollView>
       )}
     </View>
   );
