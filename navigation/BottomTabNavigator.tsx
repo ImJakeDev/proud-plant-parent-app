@@ -35,7 +35,7 @@ export default function BottomTabNavigator() {
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }: any) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon name="home" color={color} />
           ),
         }}
       />
@@ -44,7 +44,7 @@ export default function BottomTabNavigator() {
         component={PlantParentNavigator}
         options={{
           tabBarIcon: ({ color }: any) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <TabBarIcon name="person" color={color} />
           ),
         }}
       />
