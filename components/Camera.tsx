@@ -54,7 +54,9 @@ export default function CameraFeature(props: ICameraFeature) {
     <View style={styles.container}>
       <Camera style={styles.camera} type={type} ref={(ref) => setCamera(ref)}>
         <View style={styles.buttonContainer}>
-          <Button title="Take Picture" onPress={takePicture} />
+          <View style={{alignSelf: "flex-end"}}>
+            <Button title="Take Picture" onPress={takePicture} />
+          </View>
         </View>
       </Camera>
     </View>
